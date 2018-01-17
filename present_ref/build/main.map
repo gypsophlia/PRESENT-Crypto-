@@ -1,0 +1,1177 @@
+Archive member included because of file (symbol)
+
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+                              build/main.o (__lshrdi3)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+                              build/main.o (__ashldi3)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                              build/cs.o (__mspabi_divi)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                              build/cs.o (__mspabi_divli)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(slli.o)
+                              /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o) (__mspabi_slll)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(srli.o)
+                              build/timer_a.o (__mspabi_srli_3)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+                              build/uart_fifo.o (memset)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+                              /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o (__crt0_init_bss)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+                              /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o (__crt0_movedata)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+                              /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o (__crt0_call_init_then_main)
+/opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+                              /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o) (memmove)
+
+Allocating common symbols
+Common symbol       size              file
+
+rx_fifo_full        0x2               build/uart_fifo.o
+rx_fifo             0x20              build/uart_fifo.o
+rx_fifo_ptA         0x2               build/uart_fifo.o
+rx_fifo_ptB         0x2               build/uart_fifo.o
+tx_fifo_ptB         0x2               build/uart_fifo.o
+tx_fifo_ptA         0x2               build/uart_fifo.o
+tx_fifo             0x20              build/uart_fifo.o
+tx_char             0x1               build/uart_fifo.o
+rx_flag             0x2               build/uart_fifo.o
+rx_char             0x1               build/uart_fifo.o
+tx_fifo_full        0x2               build/uart_fifo.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+SFR              0x00000000         0x00000010
+PERIPHERAL_8BIT  0x00000010         0x000000f0
+PERIPHERAL_16BIT 0x00000100         0x00000100
+RAM              0x00001c00         0x00000800
+INFOMEM          0x00001800         0x00000200
+INFOA            0x00001980         0x00000080
+INFOB            0x00001900         0x00000080
+INFOC            0x00001880         0x00000080
+INFOD            0x00001800         0x00000080
+ROM              0x00004400         0x0000bb80         xr
+VECT1            0x0000ff90         0x00000002
+VECT2            0x0000ff92         0x00000002
+VECT3            0x0000ff94         0x00000002
+VECT4            0x0000ff96         0x00000002
+VECT5            0x0000ff98         0x00000002
+VECT6            0x0000ff9a         0x00000002
+VECT7            0x0000ff9c         0x00000002
+VECT8            0x0000ff9e         0x00000002
+VECT9            0x0000ffa0         0x00000002
+VECT10           0x0000ffa2         0x00000002
+VECT11           0x0000ffa4         0x00000002
+VECT12           0x0000ffa6         0x00000002
+VECT13           0x0000ffa8         0x00000002
+VECT14           0x0000ffaa         0x00000002
+VECT15           0x0000ffac         0x00000002
+VECT16           0x0000ffae         0x00000002
+VECT17           0x0000ffb0         0x00000002
+VECT18           0x0000ffb2         0x00000002
+VECT19           0x0000ffb4         0x00000002
+VECT20           0x0000ffb6         0x00000002
+VECT21           0x0000ffb8         0x00000002
+VECT22           0x0000ffba         0x00000002
+VECT23           0x0000ffbc         0x00000002
+VECT24           0x0000ffbe         0x00000002
+VECT25           0x0000ffc0         0x00000002
+VECT26           0x0000ffc2         0x00000002
+VECT27           0x0000ffc4         0x00000002
+VECT28           0x0000ffc6         0x00000002
+VECT29           0x0000ffc8         0x00000002
+VECT30           0x0000ffca         0x00000002
+VECT31           0x0000ffcc         0x00000002
+VECT32           0x0000ffce         0x00000002
+VECT33           0x0000ffd0         0x00000002
+VECT34           0x0000ffd2         0x00000002
+VECT35           0x0000ffd4         0x00000002
+VECT36           0x0000ffd6         0x00000002
+VECT37           0x0000ffd8         0x00000002
+VECT38           0x0000ffda         0x00000002
+VECT39           0x0000ffdc         0x00000002
+VECT40           0x0000ffde         0x00000002
+VECT41           0x0000ffe0         0x00000002
+VECT42           0x0000ffe2         0x00000002
+VECT43           0x0000ffe4         0x00000002
+VECT44           0x0000ffe6         0x00000002
+VECT45           0x0000ffe8         0x00000002
+VECT46           0x0000ffea         0x00000002
+VECT47           0x0000ffec         0x00000002
+VECT48           0x0000ffee         0x00000002
+VECT49           0x0000fff0         0x00000002
+VECT50           0x0000fff2         0x00000002
+VECT51           0x0000fff4         0x00000002
+VECT52           0x0000fff6         0x00000002
+VECT53           0x0000fff8         0x00000002
+VECT54           0x0000fffa         0x00000002
+VECT55           0x0000fffc         0x00000002
+RESETVEC         0x0000fffe         0x00000002
+BSL              0x00001000         0x00000800
+HIFRAM           0x00010000         0x00003fff         xrw
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+LOAD build/main.o
+LOAD build/uart_fifo.o
+LOAD build/eusci_a_uart.o
+LOAD build/gpio.o
+LOAD build/cs.o
+LOAD build/pmm.o
+LOAD build/wdt_a.o
+LOAD build/timer_a.o
+LOAD build/crypto.o
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a
+START GROUP
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libnosys.a
+END GROUP
+
+__interrupt_vector_1
+ *(__interrupt_vector_1)
+
+__interrupt_vector_2
+ *(__interrupt_vector_2)
+
+__interrupt_vector_3
+ *(__interrupt_vector_3)
+
+__interrupt_vector_4
+ *(__interrupt_vector_4)
+
+__interrupt_vector_5
+ *(__interrupt_vector_5)
+
+__interrupt_vector_6
+ *(__interrupt_vector_6)
+
+__interrupt_vector_7
+ *(__interrupt_vector_7)
+
+__interrupt_vector_8
+ *(__interrupt_vector_8)
+
+__interrupt_vector_9
+ *(__interrupt_vector_9)
+
+__interrupt_vector_10
+ *(__interrupt_vector_10)
+
+__interrupt_vector_11
+ *(__interrupt_vector_11)
+
+__interrupt_vector_12
+ *(__interrupt_vector_12)
+
+__interrupt_vector_13
+ *(__interrupt_vector_13)
+
+__interrupt_vector_14
+ *(__interrupt_vector_14)
+
+__interrupt_vector_15
+ *(__interrupt_vector_15)
+
+__interrupt_vector_16
+ *(__interrupt_vector_16)
+
+__interrupt_vector_17
+ *(__interrupt_vector_17)
+
+__interrupt_vector_18
+ *(__interrupt_vector_18)
+
+__interrupt_vector_19
+ *(__interrupt_vector_19)
+
+__interrupt_vector_20
+ *(__interrupt_vector_20)
+
+__interrupt_vector_21
+ *(__interrupt_vector_21)
+
+__interrupt_vector_22
+ *(__interrupt_vector_22)
+
+__interrupt_vector_23
+ *(__interrupt_vector_23)
+
+__interrupt_vector_24
+ *(__interrupt_vector_24)
+
+__interrupt_vector_25
+ *(__interrupt_vector_25)
+
+__interrupt_vector_26
+ *(__interrupt_vector_26)
+
+__interrupt_vector_27
+ *(__interrupt_vector_27)
+
+__interrupt_vector_28
+ *(__interrupt_vector_28)
+
+__interrupt_vector_29
+ *(__interrupt_vector_29)
+
+__interrupt_vector_30
+ *(__interrupt_vector_30)
+
+__interrupt_vector_31
+ *(__interrupt_vector_31)
+ *(__interrupt_vector_aes256)
+
+__interrupt_vector_32
+ *(__interrupt_vector_32)
+ *(__interrupt_vector_rtc)
+
+__interrupt_vector_33
+ *(__interrupt_vector_33)
+ *(__interrupt_vector_port4)
+
+__interrupt_vector_34
+ *(__interrupt_vector_34)
+ *(__interrupt_vector_port3)
+
+__interrupt_vector_35
+ *(__interrupt_vector_35)
+ *(__interrupt_vector_timer3_a1)
+
+__interrupt_vector_36
+ *(__interrupt_vector_36)
+ *(__interrupt_vector_timer3_a0)
+
+__interrupt_vector_37
+ *(__interrupt_vector_37)
+ *(__interrupt_vector_port2)
+
+__interrupt_vector_38
+ *(__interrupt_vector_38)
+ *(__interrupt_vector_timer2_a1)
+
+__interrupt_vector_39
+ *(__interrupt_vector_39)
+ *(__interrupt_vector_timer2_a0)
+
+__interrupt_vector_40
+ *(__interrupt_vector_40)
+ *(__interrupt_vector_port1)
+
+__interrupt_vector_41
+ *(__interrupt_vector_41)
+ *(__interrupt_vector_timer1_a1)
+
+__interrupt_vector_42
+ *(__interrupt_vector_42)
+ *(__interrupt_vector_timer1_a0)
+
+__interrupt_vector_43
+ *(__interrupt_vector_43)
+ *(__interrupt_vector_dma)
+
+__interrupt_vector_44
+ *(__interrupt_vector_44)
+ *(__interrupt_vector_usci_a1)
+
+__interrupt_vector_45
+                0x0000ffe8        0x2
+ *(__interrupt_vector_45)
+ __interrupt_vector_45
+                0x0000ffe8        0x2 build/main.o
+ *(__interrupt_vector_timer0_a1)
+
+__interrupt_vector_46
+ *(__interrupt_vector_46)
+ *(__interrupt_vector_timer0_a0)
+
+__interrupt_vector_47
+ *(__interrupt_vector_47)
+ *(__interrupt_vector_adc12)
+
+__interrupt_vector_48
+ *(__interrupt_vector_48)
+ *(__interrupt_vector_usci_b0)
+
+__interrupt_vector_49
+                0x0000fff0        0x2
+ *(__interrupt_vector_49)
+ __interrupt_vector_49
+                0x0000fff0        0x2 build/uart_fifo.o
+ *(__interrupt_vector_usci_a0)
+
+__interrupt_vector_50
+ *(__interrupt_vector_50)
+ *(__interrupt_vector_wdt)
+
+__interrupt_vector_51
+ *(__interrupt_vector_51)
+ *(__interrupt_vector_timer0_b1)
+
+__interrupt_vector_52
+ *(__interrupt_vector_52)
+ *(__interrupt_vector_timer0_b0)
+
+__interrupt_vector_53
+ *(__interrupt_vector_53)
+ *(__interrupt_vector_comp_e)
+
+__interrupt_vector_54
+ *(__interrupt_vector_54)
+ *(__interrupt_vector_unmi)
+
+__interrupt_vector_55
+ *(__interrupt_vector_55)
+ *(__interrupt_vector_sysnmi)
+
+__reset_vector  0x0000fffe        0x2
+ *(__interrupt_vector_56)
+ *(__interrupt_vector_reset)
+ *(.resetvec)
+ .resetvec      0x0000fffe        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+
+.rodata         0x00004400       0x50
+                0x00004400                . = ALIGN (0x2)
+ *(.plt)
+ *(.rodata .rodata.* .gnu.linkonce.r.* .const .const:*)
+ .rodata        0x00004400       0x11 build/uart_fifo.o
+ *fill*         0x00004411        0x1 
+ .rodata        0x00004412       0x1c build/gpio.o
+ .rodata        0x0000442e       0x10 build/crypto.o
+ *(.rodata1)
+ *(.lower.rodata.* .lower.rodata)
+ *(.eh_frame_hdr)
+ *(.eh_frame)
+ *fill*         0x0000443e        0x2 
+ .eh_frame      0x00004440        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .eh_frame      0x00004440        0x4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ *(.gcc_except_table)
+ *(.gcc_except_table.*)
+                0x00004444                PROVIDE (__preinit_array_start, .)
+ *(.preinit_array)
+                0x00004444                PROVIDE (__preinit_array_end, .)
+                0x00004444                PROVIDE (__init_array_start, .)
+ *(SORT(.init_array.*))
+ *(.init_array)
+                0x00004444                PROVIDE (__init_array_end, .)
+                0x00004444                PROVIDE (__fini_array_start, .)
+ *(.fini_array)
+ *(SORT(.fini_array.*))
+                0x00004444                PROVIDE (__fini_array_end, .)
+                0x00004444        0x4 LONG 0x0
+ *crtbegin*.o(.ctors)
+ .ctors         0x00004448        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ *(EXCLUDE_FILE(*crtend*.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+ .ctors         0x0000444a        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ *crtbegin*.o(.dtors)
+ .dtors         0x0000444c        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ *(EXCLUDE_FILE(*crtend*.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+ .dtors         0x0000444e        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+                0x0000444e                __DTOR_END__
+
+.upper.rodata
+ *(.upper.rodata.* .upper.rodata)
+
+.data           0x00001c00        0x4 load address 0x00004450
+                0x00001c00                . = ALIGN (0x2)
+                0x00001c00                PROVIDE (__datastart, .)
+ *(.jcr)
+ .jcr           0x00001c00        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .jcr           0x00001c00        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ *(.data.rel.ro.local)
+ *(.data.rel.ro*)
+ *(.dynamic)
+ *(.data .data.* .gnu.linkonce.d.*)
+ .data          0x00001c02        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .data          0x00001c02        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+                0x00001c02                __dso_handle
+ .data          0x00001c04        0x0 build/main.o
+ .data          0x00001c04        0x0 build/uart_fifo.o
+ .data          0x00001c04        0x0 build/eusci_a_uart.o
+ .data          0x00001c04        0x0 build/gpio.o
+ .data          0x00001c04        0x0 build/cs.o
+ .data          0x00001c04        0x0 build/pmm.o
+ .data          0x00001c04        0x0 build/wdt_a.o
+ .data          0x00001c04        0x0 build/timer_a.o
+ .data          0x00001c04        0x0 build/crypto.o
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(slli.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(srli.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ .data          0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+ *(.gnu.linkonce.d.*personality*)
+ *(.data1)
+ *(.got.plt)
+ *(.got)
+                0x00001c04                . = ALIGN (0x2)
+ *(.sdata .sdata.* .gnu.linkonce.s.* D_2 D_1)
+                0x00001c04                . = ALIGN (0x2)
+ *(.lower.data.* .lower.data)
+                0x00001c04                . = ALIGN (0x2)
+                0x00001c04                _edata = .
+                0x00001c04                PROVIDE (edata, .)
+                0x00001c04                PROVIDE (__dataend, .)
+                0x00004450                PROVIDE (__romdatastart, LOADADDR (.data))
+                0x00000004                PROVIDE (__romdatacopysize, SIZEOF (.data))
+
+.upper.data     0x00010000        0x2 load address 0x00004454
+                0x00004454                __upper_data_init = LOADADDR (.upper.data)
+                0x00010000        0x2 SHORT 0x1
+                0x00010002                __high_datastart = .
+ *(.upper.data.* .upper.data)
+                0x00010002                __high_dataend = .
+                0x00000000                __rom_highdatacopysize = (SIZEOF (.upper.data) - 0x2)
+                0x00004456                __rom_highdatastart = (LOADADDR (.upper.data) + 0x2)
+
+.bss            0x00001c04       0x74
+                0x00001c04                . = ALIGN (0x2)
+                0x00001c04                PROVIDE (__bssstart, .)
+ *(.dynbss)
+ *(.sbss .sbss.*)
+ *(.bss .bss.* .gnu.linkonce.b.*)
+ .bss           0x00001c04        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .bss           0x00001c04       0x12 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .bss           0x00001c16        0x8 build/main.o
+ .bss           0x00001c1e        0x0 build/uart_fifo.o
+ .bss           0x00001c1e        0x0 build/eusci_a_uart.o
+ .bss           0x00001c1e        0x0 build/gpio.o
+ .bss           0x00001c1e        0x8 build/cs.o
+ .bss           0x00001c26        0x0 build/pmm.o
+ .bss           0x00001c26        0x0 build/wdt_a.o
+ .bss           0x00001c26        0x0 build/timer_a.o
+ .bss           0x00001c26        0x0 build/crypto.o
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(slli.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(srli.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ .bss           0x00001c26        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+ *(.lower.bss.* .lower.bss)
+                0x00001c26                . = ALIGN (0x2)
+ *(COMMON)
+ COMMON         0x00001c26       0x52 build/uart_fifo.o
+                0x00001c26                rx_fifo_full
+                0x00001c28                rx_fifo
+                0x00001c48                rx_fifo_ptA
+                0x00001c4a                rx_fifo_ptB
+                0x00001c4c                tx_fifo_ptB
+                0x00001c4e                tx_fifo_ptA
+                0x00001c50                tx_fifo
+                0x00001c70                tx_char
+                0x00001c72                rx_flag
+                0x00001c74                rx_char
+                0x00001c76                tx_fifo_full
+                0x00001c78                PROVIDE (__bssend, .)
+                0x00000074                PROVIDE (__bsssize, SIZEOF (.bss))
+
+.noinit         0x00001c78        0x0
+                0x00001c78                . = ALIGN (0x2)
+                0x00001c78                PROVIDE (__noinit_start, .)
+ *(.noinit)
+                0x00001c78                . = ALIGN (0x2)
+                0x00001c78                PROVIDE (__noinit_end, .)
+                0x00001c78                _end = .
+                0x00001c78                PROVIDE (end, .)
+
+.upper.bss      0x00010002        0x0
+                0x00010002                . = ALIGN (0x2)
+                0x00010002                __high_bssstart = .
+ *(.upper.bss.* .upper.bss)
+                0x00010002                . = ALIGN (0x2)
+                0x00010002                __high_bssend = .
+
+.stack          0x00002400        0x0
+                0x00002400                PROVIDE (__stack, .)
+ *(.stack)
+
+.text           0x00004456     0x20a6
+                0x00004456                PROVIDE (_start, .)
+                0x00004456                . = ALIGN (0x2)
+ *(SORT(.crt_*))
+ .crt_0000start
+                0x00004456        0x4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+                0x00004456                __crt0_start
+ .crt_0100init_bss
+                0x0000445a        0xe /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+                0x0000445a                __crt0_init_bss
+ .crt_0300movedata
+                0x00004468       0x14 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+                0x00004468                __crt0_movedata
+ .crt_0700call_init_then_main
+                0x0000447c        0xa /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+                0x0000447c                __crt0_call_init_then_main
+ .crt_0900main_init
+                0x00004486       0x36 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+                0x00004486                _msp430_run_init_array
+                0x00004492                _msp430_run_preinit_array
+                0x0000449e                _msp430_run_fini_array
+                0x000044bc                . = ALIGN (0x2)
+ *(.lowtext)
+                0x000044bc                . = ALIGN (0x2)
+ *(.lower.text.* .lower.text)
+                0x000044bc                . = ALIGN (0x2)
+ *(.text .stub .text.* .gnu.linkonce.t.* .text:*)
+ .text          0x000044bc        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .text          0x000044bc       0xc6 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .text          0x00004582      0x2fc build/main.o
+                0x00004582                ctrinc
+                0x000045c4                cpucycles
+                0x000045ea                main
+ .text          0x0000487e      0x362 build/uart_fifo.o
+                0x0000487e                uart_init
+                0x00004926                uart_getc
+                0x0000495e                uart_gets
+                0x000049ca                uart_puthex
+                0x00004a80                uart_putc
+                0x00004ad8                uart_puts
+                0x00004b4a                USCI_A0_ISR
+ .text          0x00004be0      0x182 build/eusci_a_uart.o
+                0x00004be0                EUSCI_A_UART_init
+                0x00004c72                EUSCI_A_UART_transmitData
+                0x00004c8e                EUSCI_A_UART_receiveData
+                0x00004ca6                EUSCI_A_UART_enableInterrupt
+                0x00004cbe                EUSCI_A_UART_disableInterrupt
+                0x00004cd6                EUSCI_A_UART_getInterruptStatus
+                0x00004cde                EUSCI_A_UART_clearInterrupt
+                0x00004ce8                EUSCI_A_UART_enable
+                0x00004cee                EUSCI_A_UART_disable
+                0x00004cf4                EUSCI_A_UART_queryStatusFlags
+                0x00004cfc                EUSCI_A_UART_setDormant
+                0x00004d02                EUSCI_A_UART_resetDormant
+                0x00004d08                EUSCI_A_UART_transmitAddress
+                0x00004d16                EUSCI_A_UART_transmitBreak
+                0x00004d44                EUSCI_A_UART_getReceiveBufferAddress
+                0x00004d4c                EUSCI_A_UART_getTransmitBufferAddress
+                0x00004d54                EUSCI_A_UART_selectDeglitchTime
+ .text          0x00004d62      0x244 build/gpio.o
+                0x00004d62                GPIO_setAsOutputPin
+                0x00004d88                GPIO_setAsInputPin
+                0x00004db0                GPIO_setAsPeripheralModuleFunctionOutputPin
+                0x00004dfa                GPIO_setAsPeripheralModuleFunctionInputPin
+                0x00004e48                GPIO_setOutputHighOnPin
+                0x00004e62                GPIO_setOutputLowOnPin
+                0x00004e7c                GPIO_toggleOutputOnPin
+                0x00004e96                GPIO_setAsInputPinWithPullDownResistor
+                0x00004ec4                GPIO_setAsInputPinWithPullUpResistor
+                0x00004ef2                GPIO_getInputPinValue
+                0x00004f16                GPIO_enableInterrupt
+                0x00004f30                GPIO_disableInterrupt
+                0x00004f4a                GPIO_getInterruptStatus
+                0x00004f64                GPIO_clearInterrupt
+                0x00004f7e                GPIO_selectInterruptEdge
+ .text          0x00004fa6      0xb68 build/cs.o
+                0x00004fa6                CS_setExternalClockSource
+                0x00004fb8                CS_initClockSignal
+                0x0000502e                CS_turnOnLFXT
+                0x0000506c                CS_bypassLFXT
+                0x00005092                CS_turnOnLFXTWithTimeout
+                0x00005104                CS_bypassLFXTWithTimeout
+                0x0000514e                CS_turnOffLFXT
+                0x0000515e                CS_turnOnHFXT
+                0x00005200                CS_bypassHFXT
+                0x0000528e                CS_turnOnHFXTWithTimeout
+                0x00005364                CS_bypassHFXTWithTimeout
+                0x0000541c                CS_turnOffHFXT
+                0x0000542e                CS_enableClockRequest
+                0x0000543e                CS_disableClockRequest
+                0x0000544e                CS_getFaultFlagStatus
+                0x00005454                CS_clearFaultFlag
+                0x00005464                CS_getACLK
+                0x00005682                CS_getSMCLK
+                0x000058a0                CS_getMCLK
+                0x00005ab6                CS_turnOffVLO
+                0x00005ac6                CS_clearAllOscFlagsWithTimeout
+                0x00005afc                CS_setDCOFreq
+ .text          0x00005b0e       0xcc build/pmm.o
+                0x00005b0e                PMM_enableLowPowerReset
+                0x00005b24                PMM_disableLowPowerReset
+                0x00005b3a                PMM_enableSVSH
+                0x00005b50                PMM_disableSVSH
+                0x00005b66                PMM_turnOnRegulator
+                0x00005b7c                PMM_turnOffRegulator
+                0x00005b92                PMM_trigPOR
+                0x00005ba6                PMM_trigBOR
+                0x00005bba                PMM_clearInterrupt
+                0x00005bce                PMM_getInterruptStatus
+                0x00005bd4                PMM_unlockLPM5
+ .text          0x00005bda       0x68 build/wdt_a.o
+                0x00005bda                WDT_A_hold
+                0x00005bf2                WDT_A_start
+                0x00005c04                WDT_A_resetTimer
+                0x00005c1a                WDT_A_initWatchdogTimer
+                0x00005c2e                WDT_A_initIntervalTimer
+ .text          0x00005c42      0x2cc build/timer_a.o
+                0x00005c42                Timer_A_startCounter
+                0x00005c48                Timer_A_initContinuousMode
+                0x00005c9c                Timer_A_initUpMode
+                0x00005d14                Timer_A_initUpDownMode
+                0x00005d8c                Timer_A_initCaptureMode
+                0x00005dbc                Timer_A_initCompareMode
+                0x00005dea                Timer_A_enableInterrupt
+                0x00005df0                Timer_A_disableInterrupt
+                0x00005df6                Timer_A_getInterruptStatus
+                0x00005dfe                Timer_A_enableCaptureCompareInterrupt
+                0x00005e08                Timer_A_disableCaptureCompareInterrupt
+                0x00005e12                Timer_A_getCaptureCompareInterruptStatus
+                0x00005e1c                Timer_A_clear
+                0x00005e22                Timer_A_getSynchronizedCaptureCompareInput
+                0x00005e34                Timer_A_getOutputForOutputModeOutBitValue
+                0x00005e42                Timer_A_getCaptureCompareCount
+                0x00005e4a                Timer_A_setOutputForOutputModeOutBitValue
+                0x00005e5a                Timer_A_outputPWM
+                0x00005ebe                Timer_A_stop
+                0x00005ec6                Timer_A_setCompareValue
+                0x00005ece                Timer_A_clearTimerInterrupt
+                0x00005ed4                Timer_A_clearCaptureCompareInterrupt
+                0x00005edc                Timer_A_getCounterValue
+ .text          0x00005f0e      0x124 build/crypto.o
+                0x00005f0e                crypto_func
+ .text          0x00006032        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .text.__lshrdi3
+                0x00006032       0x78 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+                0x00006032                __lshrdi3
+ .text          0x000060aa        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .text.__ashldi3
+                0x000060aa       0x76 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+                0x000060aa                __ashldi3
+ .text          0x00006120        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .text.udivmodhi4
+                0x00006120       0x3c /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                0x00006120                udivmodhi4
+ .text.__divhi3
+                0x0000615c       0x46 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                0x0000615c                __mspabi_divi
+ .text.__modhi3
+                0x000061a2       0x30 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                0x000061a2                __mspabi_remi
+ .text.__udivhi3
+                0x000061d2        0x8 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                0x000061d2                __mspabi_divu
+ .text.__umodhi3
+                0x000061da        0x8 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                0x000061da                __mspabi_remu
+ .text          0x000061e2        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .text.udivmodsi4
+                0x000061e2       0x7e /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                0x000061e2                udivmodsi4
+ .text.__divsi3
+                0x00006260       0x74 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                0x00006260                __mspabi_divli
+ .text.__modsi3
+                0x000062d4       0x56 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                0x000062d4                __mspabi_remli
+ .text.__udivsi3
+                0x0000632a        0xe /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                0x0000632a                __mspabi_divlu
+ .text.__umodsi3
+                0x00006338        0xe /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                0x00006338                __mspabi_remul
+ .text          0x00006346       0x74 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(slli.o)
+                0x00006346                __mspabi_slli_15
+                0x00006348                __mspabi_slli_14
+                0x0000634a                __mspabi_slli_13
+                0x0000634c                __mspabi_slli_12
+                0x0000634e                __mspabi_slli_11
+                0x00006350                __mspabi_slli_10
+                0x00006352                __mspabi_slli_9
+                0x00006354                __mspabi_slli_8
+                0x00006356                __mspabi_slli_7
+                0x00006358                __mspabi_slli_6
+                0x0000635a                __mspabi_slli_5
+                0x0000635c                __mspabi_slli_4
+                0x0000635e                __mspabi_slli_3
+                0x00006360                __mspabi_slli_2
+                0x00006362                __mspabi_slli_1
+                0x0000636a                __mspabi_slli
+                0x00006370                __mspabi_slll_15
+                0x00006374                __mspabi_slll_14
+                0x00006378                __mspabi_slll_13
+                0x0000637c                __mspabi_slll_12
+                0x00006380                __mspabi_slll_11
+                0x00006384                __mspabi_slll_10
+                0x00006388                __mspabi_slll_9
+                0x0000638c                __mspabi_slll_8
+                0x00006390                __mspabi_slll_7
+                0x00006394                __mspabi_slll_6
+                0x00006398                __mspabi_slll_5
+                0x0000639c                __mspabi_slll_4
+                0x000063a0                __mspabi_slll_3
+                0x000063a4                __mspabi_slll_2
+                0x000063a8                __mspabi_slll_1
+                0x000063b4                __mspabi_slll
+ .text          0x000063ba       0xb4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(srli.o)
+                0x000063ba                __mspabi_srli_15
+                0x000063be                __mspabi_srli_14
+                0x000063c2                __mspabi_srli_13
+                0x000063c6                __mspabi_srli_12
+                0x000063ca                __mspabi_srli_11
+                0x000063ce                __mspabi_srli_10
+                0x000063d2                __mspabi_srli_9
+                0x000063d6                __mspabi_srli_8
+                0x000063da                __mspabi_srli_7
+                0x000063de                __mspabi_srli_6
+                0x000063e2                __mspabi_srli_5
+                0x000063e6                __mspabi_srli_4
+                0x000063ea                __mspabi_srli_3
+                0x000063ee                __mspabi_srli_2
+                0x000063f2                __mspabi_srli_1
+                0x000063fe                __mspabi_srli
+                0x00006404                __mspabi_srll_15
+                0x0000640a                __mspabi_srll_14
+                0x00006410                __mspabi_srll_13
+                0x00006416                __mspabi_srll_12
+                0x0000641c                __mspabi_srll_11
+                0x00006422                __mspabi_srll_10
+                0x00006428                __mspabi_srll_9
+                0x0000642e                __mspabi_srll_8
+                0x00006434                __mspabi_srll_7
+                0x0000643a                __mspabi_srll_6
+                0x00006440                __mspabi_srll_5
+                0x00006446                __mspabi_srll_4
+                0x0000644c                __mspabi_srll_3
+                0x00006452                __mspabi_srll_2
+                0x00006458                __mspabi_srll_1
+                0x00006468                __mspabi_srll
+ .text          0x0000646e        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .text.memset   0x0000646e       0x12 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+                0x0000646e                memset
+ .text          0x00006480        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .text          0x00006480        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .text          0x00006480        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .text          0x00006480        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .text.memmove  0x00006480       0x40 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+                0x00006480                memmove
+ .text          0x000064c0       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ .text          0x000064e0        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+ *(.text.*personality*)
+ *(.gnu.warning)
+ *(.interp .hash .dynsym .dynstr .gnu.version*)
+                0x000064e0                PROVIDE (__etext, .)
+                0x000064e0                PROVIDE (_etext, .)
+                0x000064e0                PROVIDE (etext, .)
+                0x000064e0                . = ALIGN (0x2)
+ *(.init)
+ .init          0x000064e0        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+                0x000064e0                __msp430_init
+ .init          0x000064e0        0x4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .init          0x000064e4        0x4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ .init          0x000064e8        0xa /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+                0x000064f2                __msp430_init_end
+ *(.fini)
+ .fini          0x000064f2        0x4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+                0x000064f2                __msp430_fini
+ .fini          0x000064f6        0x4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .fini          0x000064fa        0x2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+                0x000064fc                __msp430_fini_end
+ *(.tm_clone_table)
+ .tm_clone_table
+                0x000064fc        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .tm_clone_table
+                0x000064fc        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+                0x000064fc                __TMC_END__
+
+.upper.text     0x00010002        0x0
+                0x00010002                . = ALIGN (0x2)
+ *(.upper.text.* .upper.text)
+
+.infoA
+
+.infoB
+
+.infoC
+
+.infoD
+
+.MP430.attributes
+                0x00000000      0x228
+ *(.MSP430.attributes)
+ .MSP430.attributes
+                0x00000000       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .MSP430.attributes
+                0x00000017       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+ .MSP430.attributes
+                0x0000002e       0x17 build/main.o
+ .MSP430.attributes
+                0x00000045       0x17 build/uart_fifo.o
+ .MSP430.attributes
+                0x0000005c       0x17 build/eusci_a_uart.o
+ .MSP430.attributes
+                0x00000073       0x17 build/gpio.o
+ .MSP430.attributes
+                0x0000008a       0x17 build/cs.o
+ .MSP430.attributes
+                0x000000a1       0x17 build/pmm.o
+ .MSP430.attributes
+                0x000000b8       0x17 build/wdt_a.o
+ .MSP430.attributes
+                0x000000cf       0x17 build/timer_a.o
+ .MSP430.attributes
+                0x000000e6       0x17 build/crypto.o
+ .MSP430.attributes
+                0x000000fd       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .MSP430.attributes
+                0x00000114       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .MSP430.attributes
+                0x0000012b       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .MSP430.attributes
+                0x00000142       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .MSP430.attributes
+                0x00000159       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(slli.o)
+ .MSP430.attributes
+                0x00000170       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(srli.o)
+ .MSP430.attributes
+                0x00000187       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .MSP430.attributes
+                0x0000019e       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .MSP430.attributes
+                0x000001b5       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .MSP430.attributes
+                0x000001cc       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .MSP430.attributes
+                0x000001e3       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .MSP430.attributes
+                0x000001fa       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+ .MSP430.attributes
+                0x00000211       0x17 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+ *(.gnu.attributes)
+ *(__TI_build_attributes)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x7c
+ *(.comment)
+ .comment       0x00000000       0x7c /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtbegin.o
+                                 0x7d (size before relaxing)
+ .comment       0x00000000       0x7d build/main.o
+ .comment       0x00000000       0x7d build/uart_fifo.o
+ .comment       0x00000000       0x7d build/eusci_a_uart.o
+ .comment       0x00000000       0x7d build/gpio.o
+ .comment       0x00000000       0x7d build/cs.o
+ .comment       0x00000000       0x7d build/pmm.o
+ .comment       0x00000000       0x7d build/wdt_a.o
+ .comment       0x00000000       0x7d build/timer_a.o
+ .comment       0x00000000       0x7d build/crypto.o
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .comment       0x00000000       0x7d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x2d8
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x30 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .debug_aranges
+                0x00000030       0x20 build/main.o
+ .debug_aranges
+                0x00000050       0x20 build/uart_fifo.o
+ .debug_aranges
+                0x00000070       0x20 build/eusci_a_uart.o
+ .debug_aranges
+                0x00000090       0x20 build/gpio.o
+ .debug_aranges
+                0x000000b0       0x20 build/cs.o
+ .debug_aranges
+                0x000000d0       0x20 build/pmm.o
+ .debug_aranges
+                0x000000f0       0x20 build/wdt_a.o
+ .debug_aranges
+                0x00000110       0x20 build/timer_a.o
+ .debug_aranges
+                0x00000130       0x20 build/crypto.o
+ .debug_aranges
+                0x00000150       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_aranges
+                0x00000170       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_aranges
+                0x00000190       0x40 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_aranges
+                0x000001d0       0x40 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_aranges
+                0x00000210       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_aranges
+                0x00000230       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .debug_aranges
+                0x00000250       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .debug_aranges
+                0x00000270       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .debug_aranges
+                0x00000290       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_aranges
+                0x000002b0       0x28 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+
+.debug_pubnames
+ *(.debug_pubnames)
+
+.debug_info     0x00000000     0x375f
+ *(.debug_info .gnu.linkonce.wi.*)
+ .debug_info    0x00000000       0xd4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .debug_info    0x000000d4      0x655 build/main.o
+ .debug_info    0x00000729      0x6e8 build/uart_fifo.o
+ .debug_info    0x00000e11      0x460 build/eusci_a_uart.o
+ .debug_info    0x00001271      0x4ec build/gpio.o
+ .debug_info    0x0000175d      0x629 build/cs.o
+ .debug_info    0x00001d86      0x17d build/pmm.o
+ .debug_info    0x00001f03      0x1a8 build/wdt_a.o
+ .debug_info    0x000020ab      0x7d7 build/timer_a.o
+ .debug_info    0x00002882      0x1f2 build/crypto.o
+ .debug_info    0x00002a74      0x186 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_info    0x00002bfa      0x186 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_info    0x00002d80      0x250 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_info    0x00002fd0      0x266 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_info    0x00003236       0xcf /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_info    0x00003305       0xd8 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .debug_info    0x000033dd       0xd8 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .debug_info    0x000034b5       0xd8 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .debug_info    0x0000358d       0xfe /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_info    0x0000368b       0xd4 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+
+.debug_abbrev   0x00000000     0x1109
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000       0x12 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .debug_abbrev  0x00000012      0x225 build/main.o
+ .debug_abbrev  0x00000237      0x259 build/uart_fifo.o
+ .debug_abbrev  0x00000490      0x122 build/eusci_a_uart.o
+ .debug_abbrev  0x000005b2      0x116 build/gpio.o
+ .debug_abbrev  0x000006c8      0x14e build/cs.o
+ .debug_abbrev  0x00000816       0xa3 build/pmm.o
+ .debug_abbrev  0x000008b9       0xa3 build/wdt_a.o
+ .debug_abbrev  0x0000095c      0x19d build/timer_a.o
+ .debug_abbrev  0x00000af9      0x10b build/crypto.o
+ .debug_abbrev  0x00000c04       0xfe /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_abbrev  0x00000d02       0xfe /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_abbrev  0x00000e00       0xd2 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_abbrev  0x00000ed2       0xc3 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_abbrev  0x00000f95       0x8c /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00001021       0x14 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .debug_abbrev  0x00001035       0x14 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .debug_abbrev  0x00001049       0x14 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .debug_abbrev  0x0000105d       0x9a /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_abbrev  0x000010f7       0x12 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+
+.debug_line     0x00000000     0x2989
+ *(.debug_line .debug_line.* .debug_line_end)
+ .debug_line    0x00000000       0xff /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .debug_line    0x000000ff      0x2bd build/main.o
+ .debug_line    0x000003bc      0x3e2 build/uart_fifo.o
+ .debug_line    0x0000079e      0x2cc build/eusci_a_uart.o
+ .debug_line    0x00000a6a      0x391 build/gpio.o
+ .debug_line    0x00000dfb      0x9ed build/cs.o
+ .debug_line    0x000017e8      0x1c7 build/pmm.o
+ .debug_line    0x000019af      0x11b build/wdt_a.o
+ .debug_line    0x00001aca      0x406 build/timer_a.o
+ .debug_line    0x00001ed0      0x109 build/crypto.o
+ .debug_line    0x00001fd9       0x68 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_line.text.__lshrdi3
+                0x00002041       0x53 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_line_end
+                0x00002094        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_line    0x00002094       0x68 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_line.text.__ashldi3
+                0x000020fc       0x53 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_line_end
+                0x0000214f        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_line    0x0000214f       0x7e /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line.text.udivmodhi4
+                0x000021cd       0x74 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line.text.__divhi3
+                0x00002241       0x58 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line.text.__modhi3
+                0x00002299       0x41 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line.text.__udivhi3
+                0x000022da       0x1d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line.text.__umodhi3
+                0x000022f7       0x1d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line_end
+                0x00002314        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_line    0x00002314       0x7e /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line.text.udivmodsi4
+                0x00002392       0x74 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line.text.__divsi3
+                0x00002406       0x58 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line.text.__modsi3
+                0x0000245e       0x41 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line.text.__udivsi3
+                0x0000249f       0x1d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line.text.__umodsi3
+                0x000024bc       0x1d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line_end
+                0x000024d9        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_line    0x000024d9      0x117 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_line.text.memset
+                0x000025f0       0x22 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_line_end
+                0x00002612        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_line    0x00002612       0x84 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_bss.o)
+ .debug_line    0x00002696       0x90 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_movedata.o)
+ .debug_line    0x00002726       0x7e /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libcrt.a(crt_main.o)
+ .debug_line    0x000027a4      0x118 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_line.text.memmove
+                0x000028bc       0x40 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_line_end
+                0x000028fc        0x0 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_line    0x000028fc       0x8d /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+
+.debug_frame    0x00000000      0xa54
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x7c build/main.o
+ .debug_frame   0x0000007c       0xd0 build/uart_fifo.o
+ .debug_frame   0x0000014c      0x124 build/eusci_a_uart.o
+ .debug_frame   0x00000270      0x104 build/gpio.o
+ .debug_frame   0x00000374      0x19c build/cs.o
+ .debug_frame   0x00000510       0xc4 build/pmm.o
+ .debug_frame   0x000005d4       0x64 build/wdt_a.o
+ .debug_frame   0x00000638      0x1d0 build/timer_a.o
+ .debug_frame   0x00000808       0x40 build/crypto.o
+ .debug_frame   0x00000848       0x40 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_frame   0x00000888       0x40 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_frame   0x000008c8       0x7c /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_frame   0x00000944       0xbc /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_frame   0x00000a00       0x24 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_frame   0x00000a24       0x30 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+
+.debug_str      0x00000000     0x1616
+ *(.debug_str)
+ .debug_str     0x00000000      0x344 build/main.o
+                                0x3a0 (size before relaxing)
+ .debug_str     0x00000344      0x26c build/uart_fifo.o
+                                0x45c (size before relaxing)
+ .debug_str     0x000005b0      0x171 build/eusci_a_uart.o
+                                0x46d (size before relaxing)
+ .debug_str     0x00000721      0x143 build/gpio.o
+                                0x38b (size before relaxing)
+ .debug_str     0x00000864      0x2b7 build/cs.o
+                                0x4f2 (size before relaxing)
+ .debug_str     0x00000b1b       0xce build/pmm.o
+                                0x264 (size before relaxing)
+ .debug_str     0x00000be9       0x93 build/wdt_a.o
+                                0x221 (size before relaxing)
+ .debug_str     0x00000c7c      0x452 build/timer_a.o
+                                0x68f (size before relaxing)
+ .debug_str     0x000010ce       0x52 build/crypto.o
+                                0x1e0 (size before relaxing)
+ .debug_str     0x00001120      0x226 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+                                0x2af (size before relaxing)
+ .debug_str     0x00001346        0xa /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+                                0x2af (size before relaxing)
+ .debug_str     0x00001350       0xa8 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+                                0x20b (size before relaxing)
+ .debug_str     0x000013f8       0x94 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+                                0x20b (size before relaxing)
+ .debug_str     0x0000148c      0x129 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+                                0x1c2 (size before relaxing)
+ .debug_str     0x000015b5       0x61 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+                                0x1dd (size before relaxing)
+
+.debug_loc      0x00000000     0x27e9
+ *(.debug_loc)
+ .debug_loc     0x00000000      0x133 build/main.o
+ .debug_loc     0x00000133      0x203 build/uart_fifo.o
+ .debug_loc     0x00000336      0x1da build/eusci_a_uart.o
+ .debug_loc     0x00000510      0x2bb build/gpio.o
+ .debug_loc     0x000007cb     0x1223 build/cs.o
+ .debug_loc     0x000019ee       0x21 build/pmm.o
+ .debug_loc     0x00001a0f       0xcd build/wdt_a.o
+ .debug_loc     0x00001adc      0x346 build/timer_a.o
+ .debug_loc     0x00001e22       0xfc build/crypto.o
+ .debug_loc     0x00001f1e       0x53 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_loc     0x00001f71       0x53 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_loc     0x00001fc4      0x2af /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_loc     0x00002273      0x343 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_loc     0x000025b6       0x87 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_loc     0x0000263d      0x1ac /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.debug_pubtypes
+ *(.debug_pubtypes)
+
+.debug_ranges   0x00000000      0x268
+ *(.debug_ranges)
+ .debug_ranges  0x00000000       0x28 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crt0.o
+ .debug_ranges  0x00000028       0x78 build/uart_fifo.o
+ .debug_ranges  0x000000a0      0x108 build/cs.o
+ .debug_ranges  0x000001a8       0x10 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_lshrdi3.o)
+ .debug_ranges  0x000001b8       0x10 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(_ashldi3.o)
+ .debug_ranges  0x000001c8       0x30 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divHI.o)
+ .debug_ranges  0x000001f8       0x30 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a(lib2divSI.o)
+ .debug_ranges  0x00000228       0x10 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memset.o)
+ .debug_ranges  0x00000238       0x10 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/libc.a(lib_a-memmove.o)
+ .debug_ranges  0x00000248       0x20 /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+
+.debug_macro
+ *(.debug_macro)
+
+/DISCARD/
+ *(.note.GNU-stack)
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/crtend.o
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/../../../../msp430-elf/lib/f5mul/crtn.o
+LOAD /opt/ti/bin/../lib/gcc/msp430-elf/4.9.1/f5mul/libgcc.a
+OUTPUT(build/main.elf elf32-msp430)
