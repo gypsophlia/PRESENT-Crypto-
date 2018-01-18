@@ -3,6 +3,10 @@
 static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
+    int i;
+    for (i=0; i < CRYPTO_IN_SIZE; i++){
+       pt[i] = pt[i] ^ key [i+2];
+    }
 }
 
 static const uint8_t sbox[16] = {
@@ -12,12 +16,55 @@ static const uint8_t sbox[16] = {
 static void sbox_layer(uint8_t s[CRYPTO_IN_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
+    int i;
+    for (i = 0; i < CRYPTO_IN_SIZE; i++){
+        // Get upper and lower 4bits form uint8
+        uint8_t upper_4bits = s[i] >> 4;
+        uint8_t lower_4bits = s[i] & 0x0f;
+
+        // Apply Sbox to lower and higher 4bits
+        s[i] = (sbox[upper_4bits] << 4) | (sbox[lower_4bits]);
+    }
+}
+
+uint8_t getbit(uint8_t a,uint8_t bit){
+    return (a>>bit) & 0x01;
+}
+
+uint8_t setbit(uint8_t a, uint8_t bit){
+    return (a | ( 1<< bit ));
+}
+
+uint8_t clrbit(uint8_t a, uint8_t bit){
+    return (a & (~(1<<bit)));
+}
+
+void cpybit(uint8_t out, uint8_t pos, uint8_t v){
+    out &= (1 << pos); // clear bit at pos 
+    out |= (v << pos); // set value
 }
 
 static void pbox_layer(uint8_t s[CRYPTO_IN_SIZE])
 {
+    uint8_t out[CRYPTO_IN_SIZE];
 	/// INSERT YOUR CODE HERE ///
+    int i;
+    uint8_t j;
+    for (i=0; i<CRYPTO_IN_SIZE*8; i++){
+        uint8_t byte_num = i>>3;
+        uint8_t bit_in_byte = i%8;
+        uint8_t tmp = getbit(s[byte_num], bit_in_byte);
+        j = (i/4) + (i % 4) * 16;
+        byte_num = j>>3;
+        bit_in_byte = i%8;
+        cpybit(out[byte_num], bit_in_byte, tmp);
+    }
+    
+    for (i=0; i<CRYPTO_IN_SIZE; i++){
+        s[i] = out[i];
+    } 
 }
+
 
 static void update_round_key(uint8_t key[CRYPTO_KEY_SIZE], const uint8_t r)
 {
