@@ -1,11 +1,23 @@
 #include "crypto.h"
+// get bit in position bit in a
+#define getbit(a, bit) ((a>>bit) & 0x01)
+// get bit in position bit in a
+#define setbit(a, bit) (a | (1<<bit))
+// clear bit in position bit in a
+#define clrbit(a, bit) (a & (~(1<<bit)))
+// Clear bit in out at position pos and set it with v
+#define cpybit(out, pos, v) {\
+    out &= ~(1<<pos); \
+    out |= (v<<pos); \
+}
 
 static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
     uint8_t i;
     for (i=0; i < CRYPTO_IN_SIZE; i++){
-       pt[i] = pt[i] ^ key [i];
+        // Xor round key with the block
+        pt[i] = pt[i] ^ key [i];
     }
 }
 
@@ -27,43 +39,33 @@ static void sbox_layer(uint8_t s[CRYPTO_IN_SIZE])
     }
 }
 
-uint8_t getbit(uint8_t a,uint8_t bit){
-    return (a>>bit) & 0x01;
-}
-
-uint8_t setbit(uint8_t a, uint8_t bit){
-    return (a | ( 1<< bit ));
-}
-
-uint8_t clrbit(uint8_t a, uint8_t bit){
-    return (a & (~(1<<bit)));
-}
-
-void cpybit(uint8_t *out, uint8_t pos, uint8_t v){
-    *out &= ~(1 << pos); // clear bit at pos
-    *out |= (v << pos); // set value
-}
-
 static void pbox_layer(uint8_t s[CRYPTO_IN_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
+    // Output of permutation
     uint8_t out[CRYPTO_IN_SIZE];
+    // Initialize output array
     uint8_t i;
     for (i=0; i<CRYPTO_IN_SIZE; i++){
         out[i] =0x00;
     }
-    for (i=0; i<CRYPTO_IN_SIZE*8; i++){
+    // Do permutation
+    for (i=0; i< CRYPTO_IN_SIZE*8; i++){
+        // Convert the source position(0~63) to byte position and bit in byte 
         uint8_t src_byte = i>>3;
         uint8_t src_bit = i%8;
 
+        // Calculate destination position
         uint8_t posi = (i/4) + (i % 4) * 16;
 
+        // Convert the destination position(0~63) to byte position and bit in byte 
         uint8_t dst_byte = posi>>3;
         uint8_t dst_bit = posi%8;
-        
+        // copy bit in src to dest
         out[dst_byte] |= ((s[src_byte]>> src_bit) & 0x1) << dst_bit;
     }
-
+    
+    //update block with ouput of permutation
     for (i=0; i<CRYPTO_IN_SIZE; i++){
         s[i] = out[i];
     }
