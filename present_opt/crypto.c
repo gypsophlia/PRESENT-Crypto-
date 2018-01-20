@@ -2097,14 +2097,12 @@ static const uint64_t spbox7[256] = {
 static void spox_layer(uint8_t s[CRYPTO_IN_SIZE])
 {
     uint64_t s_new;
-    char i;
     s_new = spbox0[s[0]] ^ spbox1[s[1]] ^ spbox2[s[2]] ^ spbox3[s[3]] ^ \
             spbox4[s[4]] ^ spbox5[s[5]] ^ spbox6[s[6]] ^ spbox7[s[7]];
-    // Optimize: using 16bit operation
+    // Optimize: using tricky 64bit operation
     // (MSP430FR5969 has 16-Bit RISC Processor)
-    uint16_t *p = (uint16_t*)s;
-    for(i=0;i<4;i++)
-         p[i]=(uint16_t)(s_new>>(i*16));
+    uint64_t *p = (uint64_t*)s;
+    p[0] = s_new;
 }
 
 
