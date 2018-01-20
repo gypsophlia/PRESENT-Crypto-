@@ -17,10 +17,12 @@ static const uint8_t sbox[16] = {
 static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
+    uint16_t *ppt = (uint16_t*) pt;
+    uint16_t *pkey = (uint16_t*) key;
     static uint8_t i;
-    for (i=0; i < CRYPTO_IN_SIZE; i++){
+    for (i=0; i < CRYPTO_IN_SIZE/2; i++){
         // Xor round key with the block
-        pt[i] = pt[i] ^ key [i];
+        ppt[i] = ppt[i] ^ pkey [i];
     }
 }
 // SPboxes
@@ -2098,16 +2100,8 @@ static void spox_layer(uint8_t s[CRYPTO_IN_SIZE])
     char i;
     s_new = spbox0[s[0]] ^ spbox1[s[1]] ^ spbox2[s[2]] ^ spbox3[s[3]] ^ \
             spbox4[s[4]] ^ spbox5[s[5]] ^ spbox6[s[6]] ^ spbox7[s[7]];
-    /*s_new = spbox0[s[0]];
-    s_new ^=spbox1[s[1]];
-    s_new ^=spbox2[s[2]];
-    s_new ^=spbox3[s[3]];
-    s_new ^=spbox4[s[4]];
-    s_new ^=spbox5[s[5]];
-    s_new ^=spbox6[s[6]];
-    s_new ^=spbox7[s[7]];
-*/     
     // Optimize: using 16bit operation
+    // (MSP430FR5969 has 16-Bit RISC Processor)
     uint16_t *p = (uint16_t*)s;
     for(i=0;i<4;i++)
          p[i]=(uint16_t)(s_new>>(i*16));
