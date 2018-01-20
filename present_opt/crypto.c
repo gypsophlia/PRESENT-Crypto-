@@ -17,13 +17,9 @@ static const uint8_t sbox[16] = {
 static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
-    uint16_t *ppt = (uint16_t*) pt;
-    uint16_t *pkey = (uint16_t*) key;
-    static uint8_t i;
-    for (i=0; i < CRYPTO_IN_SIZE/2; i++){
-        // Xor round key with the block
-        ppt[i] = ppt[i] ^ pkey [i];
-    }
+    uint64_t *ppt = (uint64_t*) pt;
+    uint64_t *pkey = (uint64_t*) key;
+    ppt[0] ^= pkey[0];  
 }
 // SPboxes
 static const uint64_t spbox0[256] = {
