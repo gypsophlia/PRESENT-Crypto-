@@ -8,6 +8,21 @@
 static void enslice(const uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT])
 {
 	/// INSERT YOUR CODE HERE ///
+    uint8_t i;
+    uint8_t j;
+    // Clear the output buffer
+    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+        state_bs[i] = 0x0;
+    }
+    for (i = 0; i < BITSLICE_WIDTH; i++){           // 16 blocks 
+        uint8_t blockStart = i*CRYPTO_IN_SIZE;      // The index of start of each block
+        for(j=0; j< CRYPTO_IN_SIZE_BIT ; j++){      // 64 bits each block
+            // Get j%8 bit in element j/8 of each block
+            state_bs[j] = state_bs[j]<<1;
+            state_bs[j] |= (pt[ blockStart + j/8] >> (j % 8)) & 0x01;
+        }
+    }
+
 }
 
 /**
@@ -18,6 +33,28 @@ static void enslice(const uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t 
 static void unslice(const bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT], uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH])
 {
 	/// INSERT YOUR CODE HERE ///
+    uint8_t i;
+    uint8_t j;
+    // Clear the pt buffer
+    for(i=0; i< CRYPTO_IN_SIZE * BITSLICE_WIDTH; i++){
+        pt[i] = 0x0;
+    }
+
+    for(i=0; i < BITSLICE_WIDTH; i++){
+        uint8_t blockStart = CRYPTO_IN_SIZE * (BITSLICE_WIDTH - i-1);
+
+        for(j =0; j< CRYPTO_IN_SIZE; j++){
+            pt[blockStart + j] |= ((state_bs[8*j + 0] >> i) & 0x01) << 0; 
+            pt[blockStart + j] |= ((state_bs[8*j + 1] >> i) & 0x01) << 1; 
+            pt[blockStart + j] |= ((state_bs[8*j + 2] >> i) & 0x01) << 2; 
+            pt[blockStart + j] |= ((state_bs[8*j + 3] >> i) & 0x01) << 3; 
+            pt[blockStart + j] |= ((state_bs[8*j + 4] >> i) & 0x01) << 4; 
+            pt[blockStart + j] |= ((state_bs[8*j + 5] >> i) & 0x01) << 5; 
+            pt[blockStart + j] |= ((state_bs[8*j + 6] >> i) & 0x01) << 6; 
+            pt[blockStart + j] |= ((state_bs[8*j + 7] >> i) & 0x01) << 7; 
+
+        }
+    }
 }
 
 /**
