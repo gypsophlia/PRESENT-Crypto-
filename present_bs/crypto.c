@@ -96,17 +96,76 @@ static void update_round_key(uint8_t key[CRYPTO_KEY_SIZE], const uint8_t r)
 	key[1] ^= r << 7;
 	key[2] ^= r >> 1;
 }
+void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT], 
+        const uint8_t key[CRYPTO_KEY_SIZE])
+{
+    uint8_t i;
+    uint8_t j;
+    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+        // Get the ith bit of key
+        uint16_t bit = (key[i/8] >> i%8) & 0x1;
+        for(j=0; j < 15; j++){
+            bit = bit | (bit << 1) ;
+        }
+        // Add round key to the ith bit of all 16 blocks
+        state[i] = state[i] ^ bit;
+    }
 
+}
+void sbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
+    uint8_t i;
+    uint8_t j;
+    bs_reg_t x[4];   // For storing bits before sbox per 4 bits
+    // Do sbox per 4 bits
+    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
+       for(j=0; j< 4; j++){
+           x[j] = state[4*i + j]; 
+       }
+
+       state[4*i] = x[0] ^ x[1] & x[2] ^ x[2] ^ x[3];
+       state[4*i + 1] = x[0] & x[2] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[1] ^ x[0] & x[2] & x[3] ^ x[2] & x[3] ^ x[3];
+       state[4*i + 2] = ~(x[0] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[2] ^ x[0] & x[3] ^ x[0] & x[2] & x[3] ^ x[3]);
+       state[4*i + 3] = ~(x[1] & x[2] & x[0] ^ x[1] & x[3] & x[0] ^ x[2] & x[3] & x[0] ^ x[0] ^ x[1] ^ x[1] & x[2] ^ x[3]); 
+    }
+    
+}
+void pbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
+    uint8_t i;
+    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
+
+    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+        uint8_t posi = (i/4) + (i % 4) * 16;
+        bb[posi] = state[i];
+    }
+
+    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+        state[i] = bb[i];
+    }
+
+}
 void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO_KEY_SIZE])
 {
 	// State buffer and additional backbuffer of same size (you can remove the backbuffer if you do not need it)
 	bs_reg_t state[CRYPTO_IN_SIZE_BIT];
-	bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
+	//bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
 	
 	// Bring into bitslicing form
 	enslice(pt, state);
-	
+    
 	/// INSERT YOUR CODE HERE ///
+    uint8_t i;
+    for(i = 1; i <= 31; i++)
+	{
+		// Note +2 offset on key since output of keyschedule are upper 8 byte
+        
+        add_round_key(state, key + 2);
+		sbox_layer(state);
+		pbox_layer(state);
+		update_round_key(key, i);
+	}
+
+	// Note +2 offset on key since output of keyschedule are upper 8 byte
+	add_round_key(state, key + 2);
 		
 	// Convert back to normal form
 	unslice(state, pt);
