@@ -5,7 +5,7 @@
  * @param pt Input: state_bs in normal form
  * @param state_bs Output: Bitsliced state
  */
-static void enslice(const uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT])
+static void enslice(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT])
 {
 	/// INSERT YOUR CODE HERE ///
     uint8_t i;
@@ -18,8 +18,15 @@ static void enslice(const uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t 
         uint8_t blockStart = i*CRYPTO_IN_SIZE;      // The index of start of each block
         for(j=0; j< CRYPTO_IN_SIZE_BIT ; j++){      // 64 bits each block
             // Get j%8 bit in element j/8 of each block
+            // Then "Push" it to the bs array
+            uint8_t biti = j/8;
+            
+            // shl one bit to give space to the incomming bit
             state_bs[j] = state_bs[j]<<1;
-            state_bs[j] |= (pt[ blockStart + j/8] >> (j % 8)) & 0x01;
+            // Get the last bit of the shifited plaintext
+            state_bs[j] |= pt[blockStart + biti] & 0x01;
+            // shr plaintext in every loop to get better performance
+            pt[blockStart +biti] = pt[blockStart + biti] >> 1;
         }
     }
 
