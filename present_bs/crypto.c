@@ -112,36 +112,47 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
     }
 
 }
-void sbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
+void spbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
     uint8_t i;
     uint8_t j;
     bs_reg_t x[4];   // For storing bits before sbox per 4 bits
+    bs_reg_t t[4];
+    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
     // Do sbox per 4 bits
     for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
        for(j=0; j< 4; j++){
            x[j] = state[4*i + j]; 
        }
+       /*
+       t[0] = x[2] ^ x[1];
+       t[1] = x[1] & t[0];
+       t[2] = x[0] ^ t[1];
+       state[4*i + 3] = x[3] ^ t[2];
+       t[1] = t[0] & t[2];
 
-       state[4*i] = x[0] ^ x[1] & x[2] ^ x[2] ^ x[3];
-       state[4*i + 1] = x[0] & x[2] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[1] ^ x[0] & x[2] & x[3] ^ x[2] & x[3] ^ x[3];
-       state[4*i + 2] = ~(x[0] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[2] ^ x[0] & x[3] ^ x[0] & x[2] & x[3] ^ x[3]);
-       state[4*i + 3] = ~(x[1] & x[2] & x[0] ^ x[1] & x[3] & x[0] ^ x[2] & x[3] & x[0] ^ x[0] ^ x[1] ^ x[1] & x[2] ^ x[3]); 
+       t[0] ^= state[4*i +3];
+       t[1] ^= x[1];
+       t[3] = x[3] | t[1];
+       state[4*i + 2] = t[0] ^ t[3];
+       x[3] = ~x[3];
+
+       t[1] ^= x[3];
+       state[4*i] = state[4*i + 2] ^ t[1];
+       t[1] |= t[0];
+       state[4*i + 1] = t[2] ^ t[1];
+       */
+
+        // i is the count of every 4 bits
+
+       bb[i] = x[0] ^ x[1] & x[2] ^ x[2] ^ x[3];
+       bb[i+16] = x[0] & x[2] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[1] ^ x[0] & x[2] & x[3] ^ x[2] & x[3] ^ x[3];
+       bb[i + 2*16] = ~(x[0] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[2] ^ x[0] & x[3] ^ x[0] & x[2] & x[3] ^ x[3]);
+       bb[i + 3*16] = ~(x[1] & x[2] & x[0] ^ x[1] & x[3] & x[0] ^ x[2] & x[3] & x[0] ^ x[0] ^ x[1] ^ x[1] & x[2] ^ x[3]); 
     }
-    
-}
-void pbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
-    uint8_t i;
-    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
-
-    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
-        uint8_t posi = (i/4) + (i % 4) * 16;
-        bb[posi] = state[i];
-    }
-
     for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
         state[i] = bb[i];
     }
-
+    
 }
 void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO_KEY_SIZE])
 {
@@ -159,8 +170,7 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
 		// Note +2 offset on key since output of keyschedule are upper 8 byte
         
         add_round_key(state, key + 2);
-		sbox_layer(state);
-		pbox_layer(state);
+		spbox_layer(state);
 		update_round_key(key, i);
 	}
 
