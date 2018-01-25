@@ -108,12 +108,25 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
 {
     uint8_t i;
     uint8_t j;
+    uint8_t tmpkey[CRYPTO_KEY_SIZE];
+    // Copy key to a temp variable
+    ((uint64_t*) tmpkey)[0] = ((uint64_t*) key)[0];
+    ((uint16_t*) tmpkey)[4] = ((uint16_t*) key)[4];
+
+     
     for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+    	// bitwise index in uint8
+    	uint8_t biti = i/8;
         // Get the ith bit of key
-        uint16_t bit = (key[i/8] >> i%8) & 0x1;
-        for(j=0; j < 15; j++){
-            bit = bit | (bit << 1) ;
-        }
+        uint16_t bit = tmpkey[biti] & 0x1;
+
+        // Fill all bits in uint16 bit variable
+        bit = bit | bit << 1;
+        bit = bit | bit << 2;
+        bit = bit | bit << 4;
+        bit = bit | bit << 8;
+
+        tmpkey[biti] = tmpkey[biti] >> 1;
         // Add round key to the ith bit of all 16 blocks
         state[i] = state[i] ^ bit;
     }
