@@ -140,9 +140,7 @@ void spbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
     bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
     // Do sbox per 4 bits
     for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
-       for(j=0; j< 4; j++){
-           x[j] = state[4*i + j]; 
-       }
+       ((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0]; 
        /*
        t[0] = x[2] ^ x[1];
        t[1] = x[1] & t[0];
