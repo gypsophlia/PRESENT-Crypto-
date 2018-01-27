@@ -139,13 +139,13 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
 }
 void spbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
     uint8_t i;
-    //bs_reg_t x[4];   // For storing bits before sbox per 4 bits
+    bs_reg_t x[4];   // For storing bits before sbox per 4 bits
     //bs_reg_t t[4];
     bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
     // Do sbox per 4 bits
     for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
-        bs_reg_t* x = state+4*i;
-        //((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0];
+        //bs_reg_t* x = state+4*i;
+        ((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0];
         /*
            t[0] = x[2] ^ x[1];
            t[1] = x[1] & t[0];
