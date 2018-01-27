@@ -146,79 +146,42 @@ void spbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
     for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
         //bs_reg_t* x = state+4*i;
         ((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0];
-        /*
-           t[0] = x[2] ^ x[1];
-           t[1] = x[1] & t[0];
-           t[2] = x[0] ^ t[1];
-           state[4*i + 3] = x[3] ^ t[2];
-           t[1] = t[0] & t[2];
-
-           t[0] ^= state[4*i +3];
-           t[1] ^= x[1];
-           t[3] = x[3] | t[1];
-           state[4*i + 2] = t[0] ^ t[3];
-           x[3] = ~x[3];
-
-           t[1] ^= x[3];
-           state[4*i] = state[4*i + 2] ^ t[1];
-           t[1] |= t[0];
-           state[4*i + 1] = t[2] ^ t[1];
-           */
-
         // i is the count of every 4 bits
-        //https://link.springer.com/content/pdf/10.1007%2F978-3-642-33027-8.pdf
+        // Implementing_Lightweight_Block_Ciphers_on_x86_Architectures
+        
 
-        /*
-        uint16_t r0=x[0];
-        uint16_t r1=x[1];
-        uint16_t r2=x[2];
-        uint16_t r3=x[3];
         uint16_t tmp;
 
+        x[2] = x[2]^x[1];
+        x[3] = x[3]^x[1];
+        tmp = x[2];
+        x[2] = x[2] & x[3];
 
+        x[1] = x[1] ^ x[2];
+        tmp = tmp ^ x[0];
+        x[2] = x[1];
+        x[1] = x[1] & tmp;
 
-        r2 = r2^r1;
-        r3 = r3^r1;
+        x[1] = x[1]^x[3];
+        tmp= tmp^x[0];
+        tmp = tmp|x[2];
+        x[2] = x[2]^x[0];
 
-        tmp = r2;
-        r2 = r2 & r3;
+        x[2] = x[2]^x[1];
+        tmp= tmp^x[3];
+        x[2] = ~x[2];
+        x[0] = x[0]^tmp;
 
-        r1 = r1 ^ r2;
-        tmp = tmp ^ r0;
+        x[3] = x[2];
+        x[2] = x[2]&x[1];
+        x[2] = x[2]^tmp;
+        x[2] = ~x[2];
 
-        r2 = r1;
-        r1 = r1 & tmp;
-
-        r1 = r1^r3;
-        tmp= tmp^r0;
-
-        tmp = tmp|r2;
-        r2 = r2^r0;
-
-        r2 = r2^r1;
-        tmp= tmp^r3;
-
-        r2 = ~r2;
-        r0 = r0^tmp;
-
-        r3 = r2;
-        r2 = r2&r1;
-
-        r2 = r2|tmp;
-        r2 = ~r2;
-
-
-        bb[i] = r0;
-        bb[i+16] = r1;
-        bb[i + 2*16] = r2;
-        bb[i + 3*16] = r3;
-        */
         
-           bb[i] = x[0] ^ x[1] & x[2] ^ x[2] ^ x[3];
-           bb[i+16] = x[0] & x[2] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[1] ^ x[0] & x[2] & x[3] ^ x[2] & x[3] ^ x[3];
-           bb[i + 2*16] = ~(x[0] & x[1] ^ x[0] & x[3] & x[1] ^ x[3] & x[1] ^ x[2] ^ x[0] & x[3] ^ x[0] & x[2] & x[3] ^ x[3]);
-           bb[i + 3*16] = ~(x[1] & x[2] & x[0] ^ x[1] & x[3] & x[0] ^ x[2] & x[3] & x[0] ^ x[0] ^ x[1] ^ x[1] & x[2] ^ x[3]);
-           
+        bb[i] = x[0];
+        bb[i+16] = x[1];
+        bb[i + 2*16] = x[2];
+        bb[i + 3*16] = x[3];
     }
     for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
         state[i] = bb[i];
