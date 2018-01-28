@@ -130,7 +130,7 @@ void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
         // bitwise index in uint8
         uint8_t biti = i>>1;
         uint8_t bit4i = 4*i;
-        // Get the ith bit of key
+        // Get the lower 4 bits of current byte of key
         uint16_t bit4 = tmpkey[biti] & 0x0f;
         uint64_t slicedKey_4bits = boxKS[bit4];
 
