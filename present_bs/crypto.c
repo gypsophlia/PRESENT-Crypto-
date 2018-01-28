@@ -1,4 +1,10 @@
 #include "crypto.h"
+uint64_t boxKS[16] = {
+0x0000000000000000, 0x000000000000ffff, 0x00000000ffff0000, 0x00000000ffffffff, 
+0x0000ffff00000000, 0x0000ffff0000ffff, 0x0000ffffffff0000, 0x0000ffffffffffff, 
+0xffff000000000000, 0xffff00000000ffff, 0xffff0000ffff0000, 0xffff0000ffffffff, 
+0xffffffff00000000, 0xffffffff0000ffff, 0xffffffffffff0000, 0xffffffffffffffff
+};
 
 /**
  * Bring normal buffer into bitsliced form
@@ -42,7 +48,6 @@ static void unslice(bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT], uint8_t pt[CRYPTO_IN_
     /// INSERT YOUR CODE HERE ///
     uint8_t i;
     uint8_t j;
-    uint8_t k;
     // Clear the pt buffer
     for(i=0; i< CRYPTO_IN_SIZE * BITSLICE_WIDTH; i++){
         pt[i] = 0x0;
@@ -105,6 +110,82 @@ static void update_round_key(uint8_t key[CRYPTO_KEY_SIZE], const uint8_t r)
     key[1] ^= r << 7;
     key[2] ^= r >> 1;
 }
+void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
+        const uint8_t key[CRYPTO_KEY_SIZE])
+{
+    uint8_t i;
+    uint8_t tmpkey[CRYPTO_KEY_SIZE];
+    uint16_t *p1 = (uint16_t*)tmpkey;
+    uint16_t *p2 = (uint16_t*)key;
+    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
+    bs_reg_t x[4];   // For storing bits before sbox per 4 bits
+    // Copy key to a temp variable
+    for (i=0; i<5; i++){
+        p1[i] = p2[i];
+    }
+    //((uint64_t*) tmpkey)[0] = ((uint64_t*) key)[0];
+    //((uint16_t*) tmpkey)[4] = ((uint16_t*) key)[4];
+
+    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
+        // bitwise index in uint8
+        uint8_t biti = i>>1;
+        uint8_t bit4i = 4*i;
+        // Get the ith bit of key
+        uint16_t bit4 = tmpkey[biti] & 0x0f;
+        uint64_t slicedKey_4bits = boxKS[bit4];
+
+        uint64_t *p = (uint64_t*)(&state[bit4i]);
+        *p = *p ^ slicedKey_4bits;
+
+        tmpkey[biti] = tmpkey[biti] >> 4;
+
+        //---------------SPBOX--------------
+        //bs_reg_t* x = state+4*i;
+        ((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0];
+        // i is the count of every 4 bits
+        // Implementing_Lightweight_Block_Ciphers_on_x86_Architectures
+        
+
+        uint16_t tmp;
+
+        x[2] = x[2]^x[1];
+        x[3] = x[3]^x[1];
+        tmp = x[2];
+        x[2] = x[2] & x[3];
+
+        x[1] = x[1] ^ x[2];
+        tmp = tmp ^ x[0];
+        x[2] = x[1];
+        x[1] = x[1] & tmp;
+
+        x[1] = x[1]^x[3];
+        tmp= tmp^x[0];
+        tmp = tmp|x[2];
+        x[2] = x[2]^x[0];
+
+        x[2] = x[2]^x[1];
+        tmp= tmp^x[3];
+        x[2] = ~x[2];
+        x[0] = x[0]^tmp;
+
+        x[3] = x[2];
+        x[2] = x[2]&x[1];
+        x[2] = x[2]^tmp;
+        x[2] = ~x[2];
+
+        
+        bb[i] = x[0];
+        bb[i+16] = x[1];
+        bb[i + 2*16] = x[2];
+        bb[i + 3*16] = x[3];
+
+
+    }
+    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+        state[i] = bb[i];
+    }
+
+}
 void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
         const uint8_t key[CRYPTO_KEY_SIZE])
 {
@@ -119,23 +200,19 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
     //((uint64_t*) tmpkey)[0] = ((uint64_t*) key)[0];
     //((uint16_t*) tmpkey)[4] = ((uint16_t*) key)[4];
 
-
-    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
         // bitwise index in uint8
-        uint8_t biti = i/8;
+        uint8_t biti = i>>1;
+        uint8_t bit4i = 4*i;
         // Get the ith bit of key
-        uint16_t bit = tmpkey[biti] & 0x1;
+        uint16_t bit4 = tmpkey[biti] & 0x0f;
+        uint64_t slicedKey_4bits = boxKS[bit4];
 
-        // Fill all bits in uint16 bit variable
-        if(bit == 0x01){
-            bit = 0xffff;
-        }
+        uint64_t *p = (uint64_t*)(&state[bit4i]);
+        *p = *p ^ slicedKey_4bits;
 
-        tmpkey[biti] = tmpkey[biti] >> 1;
-        // Add round key to the ith bit of all 16 blocks
-        state[i] = state[i] ^ bit;
+        tmpkey[biti] = tmpkey[biti] >> 4;
     }
-
 }
 void spbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
     uint8_t i;
@@ -203,8 +280,8 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
     {
         // Note +2 offset on key since output of keyschedule are upper 8 byte
 
-        add_round_key(state, key + 2);
-        spbox_layer(state);
+        add_round_key_spbox(state, key + 2);
+        //spbox_layer(state);
         update_round_key(key, i);
     }
 
