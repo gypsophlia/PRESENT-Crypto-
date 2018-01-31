@@ -207,8 +207,6 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
     // State buffer and additional backbuffer of same size (you can remove the backbuffer if you do not need it)
     bs_reg_t state[CRYPTO_IN_SIZE_BIT];
     bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
-    bs_reg_t *p1 = state;
-    bs_reg_t *p2 = bb;
     bs_reg_t *ptmp = state;
 
     // Bring into bitslicing form
@@ -221,14 +219,11 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
         // Note +2 offset on key since output of keyschedule are upper 8 byte
         
 
-        ptmp = add_round_key_spbox(p1,p2, key + 2);
         if(ptmp == bb){
-            p2 = state;
-            p1 = bb;
+            ptmp = add_round_key_spbox(bb,state, key + 2);
 
-        }else if(ptmp == state){
-            p1 = state;
-            p2 = bb;
+        }else{ //if(ptmp == state){
+            ptmp = add_round_key_spbox(state,bb, key + 2);
         }
         //spbox_layer(state);
         update_round_key(key, i);
