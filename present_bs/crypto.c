@@ -17,9 +17,9 @@ static void enslice(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t state_
     uint8_t i;
     uint8_t j;
     // Clear the output buffer
-    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
-        state_bs[i] = 0x0;
-    }
+    //for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+    //    state_bs[i] = 0x0;
+    //}
     for (i = 0; i < BITSLICE_WIDTH; i++){           // 16 blocks
         // multipler is very fast, no need to replace with lut
         uint8_t blockStart = i*CRYPTO_IN_SIZE;      // The index of start of each block
@@ -50,9 +50,9 @@ static void unslice(bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT], uint8_t pt[CRYPTO_IN_
     uint8_t i;
     uint8_t j;
     // Clear the pt buffer
-    for(i=0; i< CRYPTO_IN_SIZE * BITSLICE_WIDTH; i++){
-        pt[i] = 0x0;
-    }
+    //for(i=0; i< CRYPTO_IN_SIZE * BITSLICE_WIDTH; i++){
+    //    pt[i] = 0x0;
+    //}
 
     for(i=0; i < BITSLICE_WIDTH; i++){
         uint8_t blockStart = i*CRYPTO_IN_SIZE; 
