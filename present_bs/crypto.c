@@ -111,12 +111,9 @@ static void update_round_key(uint8_t key[CRYPTO_KEY_SIZE], const uint8_t r)
     key[1] ^= r << 7;
     key[2] ^= r >> 1;
 }
-void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
-        const uint8_t key[CRYPTO_KEY_SIZE])
+bs_reg_t* add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT], bs_reg_t bb[CRYPTO_IN_SIZE_BIT], const uint8_t key[CRYPTO_KEY_SIZE])
 {
     uint8_t i;
-    uint8_t tmpkey[CRYPTO_KEY_SIZE];
-    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
     bs_reg_t x[4];   // For storing bits before sbox per 4 bits
 
     for(i=0; i< CRYPTO_IN_SIZE_BIT/8; i++){
@@ -135,16 +132,11 @@ void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
 
     }
 
-    // Copy data for permutation
-    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
-        bb[i] = state[i];
-    }
-
     for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
         //---------------SPBOX--------------
         //bs_reg_t* x = state+4*i;
         //x = (bb+4*i); 
-        ((uint64_t*)x)[0] = ((uint64_t*)bb)[i];
+        ((uint64_t*)x)[0] = ((uint64_t*)state)[i];
 
         // i is the count of every 4 bits
         // Implementing_Lightweight_Block_Ciphers_on_x86_Architectures
@@ -178,13 +170,14 @@ void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
         x[2] = ~x[2];
 
         
-        state[i] = x[0];
-        state[i+16] = x[1];
-        state[i + 2*16] = x[2];
-        state[i + 3*16] = x[3];
+        bb[i] = x[0];
+        bb[i+16] = x[1];
+        bb[i + 2*16] = x[2];
+        bb[i + 3*16] = x[3];
 
 
     }
+    return bb;
 
 
 }
@@ -213,7 +206,10 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
 {
     // State buffer and additional backbuffer of same size (you can remove the backbuffer if you do not need it)
     bs_reg_t state[CRYPTO_IN_SIZE_BIT];
-    //bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
+    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
+    bs_reg_t *p1 = state;
+    bs_reg_t *p2 = bb;
+    bs_reg_t *ptmp = state;
 
     // Bring into bitslicing form
     enslice(pt, state);
@@ -223,15 +219,24 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
     for(i = 1; i <= 31; i++)
     {
         // Note +2 offset on key since output of keyschedule are upper 8 byte
+        
 
-        add_round_key_spbox(state, key + 2);
+        ptmp = add_round_key_spbox(p1,p2, key + 2);
+        if(ptmp == bb){
+            p2 = state;
+            p1 = bb;
+
+        }else if(ptmp == state){
+            p1 = state;
+            p2 = bb;
+        }
         //spbox_layer(state);
         update_round_key(key, i);
     }
 
     // Note +2 offset on key since output of keyschedule are upper 8 byte
-    add_round_key(state, key + 2);
+    add_round_key(ptmp, key + 2);
 
     // Convert back to normal form
-    unslice(state, pt);
+    unslice(ptmp, pt);
 }
