@@ -120,28 +120,42 @@ void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
     bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
     bs_reg_t x[4];   // For storing bits before sbox per 4 bits
     // Copy key to a temp variable
-    for (i=0; i<5; i++){
+    for (i=0; i<4; i++){
         p1[i] = p2[i];
     }
     //((uint64_t*) tmpkey)[0] = ((uint64_t*) key)[0];
     //((uint16_t*) tmpkey)[4] = ((uint16_t*) key)[4];
 
-    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
+
+    for(i=0; i< CRYPTO_IN_SIZE_BIT/8; i++){
         // bitwise index in uint8
-        uint8_t biti = i>>1;
-        uint8_t bit4i = 4*i;
         // Get the lower 4 bits of current byte of key
-        uint16_t bit4 = tmpkey[biti] & 0x0f;
+        uint16_t bit4 = tmpkey[i] & 0x0f;
         uint64_t slicedKey_4bits = boxKS[bit4];
 
-        uint64_t *p = (uint64_t*)(&state[bit4i]);
+        uint64_t *p = ((uint64_t*)state)+i*2;
         *p = *p ^ slicedKey_4bits;
 
-        tmpkey[biti] = tmpkey[biti] >> 4;
+        tmpkey[i] = tmpkey[i] >> 4;
 
+        bit4 = tmpkey[i] & 0x0f;
+        slicedKey_4bits = boxKS[bit4];
+        p = ((uint64_t*)state)+i*2+1;
+        *p = *p ^ slicedKey_4bits;
+
+    }
+
+    // Copy data for permutation
+    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
+        bb[i] = state[i];
+    }
+
+    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
         //---------------SPBOX--------------
         //bs_reg_t* x = state+4*i;
-        ((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0];
+        //x = (bb+4*i); 
+        ((uint64_t*)x)[0] = ((uint64_t*)bb)[i];
+
         // i is the count of every 4 bits
         // Implementing_Lightweight_Block_Ciphers_on_x86_Architectures
         
@@ -174,16 +188,14 @@ void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
         x[2] = ~x[2];
 
         
-        bb[i] = x[0];
-        bb[i+16] = x[1];
-        bb[i + 2*16] = x[2];
-        bb[i + 3*16] = x[3];
+        state[i] = x[0];
+        state[i+16] = x[1];
+        state[i + 2*16] = x[2];
+        state[i + 3*16] = x[3];
 
 
     }
-    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
-        state[i] = bb[i];
-    }
+
 
 }
 void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
@@ -203,12 +215,11 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
     for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
         // bitwise index in uint8
         uint8_t biti = i>>1;
-        uint8_t bit4i = 4*i;
         // Get the ith bit of key
         uint16_t bit4 = tmpkey[biti] & 0x0f;
         uint64_t slicedKey_4bits = boxKS[bit4];
 
-        uint64_t *p = (uint64_t*)(&state[bit4i]);
+        uint64_t *p = ((uint64_t*)state)+i;
         *p = *p ^ slicedKey_4bits;
 
         tmpkey[biti] = tmpkey[biti] >> 4;
