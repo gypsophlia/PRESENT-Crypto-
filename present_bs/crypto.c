@@ -21,6 +21,7 @@ static void enslice(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t state_
         state_bs[i] = 0x0;
     }
     for (i = 0; i < BITSLICE_WIDTH; i++){           // 16 blocks
+        // multipler is very fast, no need to replace with lut
         uint8_t blockStart = i*CRYPTO_IN_SIZE;      // The index of start of each block
         for(j=0; j< CRYPTO_IN_SIZE_BIT ; j++){      // 64 bits each block
             // Get j%8 bit in element j/8 of each block
@@ -115,30 +116,19 @@ void add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
 {
     uint8_t i;
     uint8_t tmpkey[CRYPTO_KEY_SIZE];
-    uint16_t *p1 = (uint16_t*)tmpkey;
-    uint16_t *p2 = (uint16_t*)key;
     bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
     bs_reg_t x[4];   // For storing bits before sbox per 4 bits
-    // Copy key to a temp variable
-    for (i=0; i<4; i++){
-        p1[i] = p2[i];
-    }
-    //((uint64_t*) tmpkey)[0] = ((uint64_t*) key)[0];
-    //((uint16_t*) tmpkey)[4] = ((uint16_t*) key)[4];
-
 
     for(i=0; i< CRYPTO_IN_SIZE_BIT/8; i++){
         // bitwise index in uint8
         // Get the lower 4 bits of current byte of key
-        uint16_t bit4 = tmpkey[i] & 0x0f;
+        uint16_t bit4 = key[i] & 0x0f;
         uint64_t slicedKey_4bits = boxKS[bit4];
 
         uint64_t *p = ((uint64_t*)state)+i*2;
         *p = *p ^ slicedKey_4bits;
 
-        tmpkey[i] = tmpkey[i] >> 4;
-
-        bit4 = tmpkey[i] & 0x0f;
+        bit4 = (key[i]>>4) & 0x0f;
         slicedKey_4bits = boxKS[bit4];
         p = ((uint64_t*)state)+i*2+1;
         *p = *p ^ slicedKey_4bits;
@@ -202,77 +192,20 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
         const uint8_t key[CRYPTO_KEY_SIZE])
 {
     uint8_t i;
-    uint8_t tmpkey[CRYPTO_KEY_SIZE];
-    uint16_t *p1 = (uint16_t*)tmpkey;
-    uint16_t *p2 = (uint16_t*)key;
-    // Copy key to a temp variable
-    for (i=0; i<5; i++){
-        p1[i] = p2[i];
-    }
-    //((uint64_t*) tmpkey)[0] = ((uint64_t*) key)[0];
-    //((uint16_t*) tmpkey)[4] = ((uint16_t*) key)[4];
-
-    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
+    for(i=0; i< CRYPTO_IN_SIZE_BIT/8; i++){
         // bitwise index in uint8
-        uint8_t biti = i>>1;
-        // Get the ith bit of key
-        uint16_t bit4 = tmpkey[biti] & 0x0f;
+        // Get the lower 4 bits of current byte of key
+        uint16_t bit4 = key[i] & 0x0f;
         uint64_t slicedKey_4bits = boxKS[bit4];
 
-        uint64_t *p = ((uint64_t*)state)+i;
+        uint64_t *p = ((uint64_t*)state)+i*2;
         *p = *p ^ slicedKey_4bits;
 
-        tmpkey[biti] = tmpkey[biti] >> 4;
-    }
-}
-void spbox_layer(bs_reg_t state[CRYPTO_IN_SIZE_BIT]){
-    uint8_t i;
-    bs_reg_t x[4];   // For storing bits before sbox per 4 bits
-    //bs_reg_t t[4];
-    bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
-    // Do sbox per 4 bits
-    for(i=0; i< CRYPTO_IN_SIZE_BIT/4; i++){
-        //bs_reg_t* x = state+4*i;
-        ((uint64_t*)x)[0] = ((uint64_t*)(state+4*i))[0];
-        // i is the count of every 4 bits
-        // Implementing_Lightweight_Block_Ciphers_on_x86_Architectures
-        
+        bit4 = (key[i]>>4) & 0x0f;
+        slicedKey_4bits = boxKS[bit4];
+        p = ((uint64_t*)state)+i*2+1;
+        *p = *p ^ slicedKey_4bits;
 
-        uint16_t tmp;
-
-        x[2] = x[2]^x[1];
-        x[3] = x[3]^x[1];
-        tmp = x[2];
-        x[2] = x[2] & x[3];
-
-        x[1] = x[1] ^ x[2];
-        tmp = tmp ^ x[0];
-        x[2] = x[1];
-        x[1] = x[1] & tmp;
-
-        x[1] = x[1]^x[3];
-        tmp= tmp^x[0];
-        tmp = tmp|x[2];
-        x[2] = x[2]^x[0];
-
-        x[2] = x[2]^x[1];
-        tmp= tmp^x[3];
-        x[2] = ~x[2];
-        x[0] = x[0]^tmp;
-
-        x[3] = x[2];
-        x[2] = x[2]&x[1];
-        x[2] = x[2]^tmp;
-        x[2] = ~x[2];
-
-        
-        bb[i] = x[0];
-        bb[i+16] = x[1];
-        bb[i + 2*16] = x[2];
-        bb[i + 3*16] = x[3];
-    }
-    for(i=0; i< CRYPTO_IN_SIZE_BIT; i++){
-        state[i] = bb[i];
     }
 
 }
