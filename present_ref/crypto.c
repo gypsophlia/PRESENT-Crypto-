@@ -1,15 +1,4 @@
 #include "crypto.h"
-// get bit in position bit in a
-#define getbit(a, bit) ((a>>bit) & 0x01)
-// get bit in position bit in a
-#define setbit(a, bit) (a | (1<<bit))
-// clear bit in position bit in a
-#define clrbit(a, bit) (a & (~(1<<bit)))
-// Clear bit in out at position pos and set it with v
-#define cpybit(out, pos, v) {\
-    out &= ~(1<<pos); \
-    out |= (v<<pos); \
-}
 
 static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZE])
 {
