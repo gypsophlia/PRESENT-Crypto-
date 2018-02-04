@@ -1,20 +1,10 @@
 #include "crypto.h"
-// get bit in position bit in a
-#define getbit(a, bit) ((a>>bit) & 0x01)
-// get bit in position bit in a
-#define setbit(a, bit) (a | (1<<bit))
-// clear bit in position bit in a
-#define clrbit(a, bit) (a & (~(1<<bit)))
-// Clear bit in out at position pos and set it with v
-#define cpybit(out, pos, v) {\
-    out &= ~(1<<pos); \
-    out |= (v<<pos); \
-}
 static const uint8_t sbox[16] = {
 	0xC, 0x5, 0x6, 0xB, 0x9, 0x0, 0xA, 0xD, 0x3, 0xE, 0xF, 0x8, 0x4, 0x7, 0x1, 0x2,
 };
 
-// SPboxes
+// 8*64bits SPboxes
+// Jump to line 2147 to see first line of code
 static const uint64_t spbox0[256] = {
   0b0000000000000011000000000000001100000000000000000000000000000000,
  0b0000000000000010000000000000001100000000000000000000000000000001,
@@ -2083,6 +2073,8 @@ static const uint64_t spbox7[256] = {
  0b0000000000000000000000000000000011000000000000000000000000000000
 };
 
+
+// LUT for shifting right by 3 bits (used in update_round_key)
 static const uint8_t ksboxR3[256] = {
 	0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
 	0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
@@ -2118,6 +2110,7 @@ static const uint8_t ksboxR3[256] = {
 	0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f
 };
 
+// LUT for shifting left by 5 bits (used in update_round_key)
 static const uint8_t ksboxL5[256] = {
 	0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0,
 	0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0,
@@ -2156,6 +2149,7 @@ static const uint8_t ksboxL5[256] = {
 static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZE])
 {
 	/// INSERT YOUR CODE HERE ///
+    // Optimise using 64bit pointer 
     uint64_t *ppt = (uint64_t*) pt;
     uint64_t *pkey = (uint64_t*) key;
     ppt[0] ^= pkey[0];  
@@ -2163,11 +2157,11 @@ static void add_round_key(uint8_t pt[CRYPTO_IN_SIZE], uint8_t key[CRYPTO_KEY_SIZ
 
 static void spox_layer(uint8_t s[CRYPTO_IN_SIZE])
 {
+    // SPbox 8bits -> 64bits for each byte and XOR them together
+    // Optimize: using 64bit operation
     uint64_t *p = (uint64_t*)s;
     p[0] = spbox0[s[0]] ^ spbox1[s[1]] ^ spbox2[s[2]] ^ spbox3[s[3]] ^ \
             spbox4[s[4]] ^ spbox5[s[5]] ^ spbox6[s[6]] ^ spbox7[s[7]];
-    // Optimize: using tricky 64bit operation
-    // (MSP430FR5969 has 16-Bit RISC Processor)
 }
 
 
