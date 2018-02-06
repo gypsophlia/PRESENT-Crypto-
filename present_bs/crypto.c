@@ -74,6 +74,11 @@ static const uint8_t ksboxL5[256] = {
     0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0,
     0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0
 };
+static const uint8_t sbox[16] = {
+        0xC, 0x5, 0x6, 0xB, 0x9, 0x0, 0xA, 0xD, 0x3, 0xE, 0xF, 0x8, 0x4, 0x7, 0x1, 0x2,
+    };
+// For speed move some local var to global
+static uint8_t blockStart,j; 
 /**
  * Bring normal buffer into bitsliced form
  * @param pt Input: state_bs in normal form
@@ -83,10 +88,9 @@ static void enslice(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], bs_reg_t state_
 {
     /// INSERT YOUR CODE HERE ///
     uint8_t i;
-    uint8_t j;
     for (i = 0; i < BITSLICE_WIDTH; i++){           // 16 blocks
         // multipler is very fast, no need to replace with lut
-        uint8_t blockStart = i*CRYPTO_IN_SIZE;      // The index of start of each block
+        blockStart = i*CRYPTO_IN_SIZE;      // The index of start of each block
         for(j=0; j< CRYPTO_IN_SIZE_BIT ; j++){      // 64 bits each block
             // Get the j%8 bit in element j/8 of each block
             // Then "Push" it to the bs array
@@ -114,10 +118,9 @@ static void unslice(bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT], uint8_t pt[CRYPTO_IN_
 {
     /// INSERT YOUR CODE HERE ///
     uint8_t i;
-    uint8_t j;
     // Clear the pt buffer
     for(i=0; i < BITSLICE_WIDTH; i++){
-        uint8_t blockStart = i*CRYPTO_IN_SIZE;
+        blockStart = i*CRYPTO_IN_SIZE;
 
         for(j =0; j< CRYPTO_IN_SIZE_BIT; j++){
             // Stays within the byte for each 8 bits
@@ -144,9 +147,6 @@ static void unslice(bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT], uint8_t pt[CRYPTO_IN_
  */
 static void update_round_key(uint8_t key[CRYPTO_KEY_SIZE], const uint8_t r)
 {
-    const uint8_t sbox[16] = {
-        0xC, 0x5, 0x6, 0xB, 0x9, 0x0, 0xA, 0xD, 0x3, 0xE, 0xF, 0x8, 0x4, 0x7, 0x1, 0x2,
-    };
     uint8_t tmp = 0;
     const uint8_t tmp2 = key[2];
     const uint8_t tmp1 = key[1];
@@ -278,7 +278,9 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
     // State buffer and additional backbuffer of same size (you can remove the backbuffer if you do not need it)
     bs_reg_t state[CRYPTO_IN_SIZE_BIT];
     bs_reg_t bb[CRYPTO_IN_SIZE_BIT];
-    bs_reg_t *ptmp = state;
+    bs_reg_t *pcontent = bb;
+    bs_reg_t *pbb = state;
+    bs_reg_t *ptmp;
 
     // Bring into bitslicing form
     enslice(pt, state);
@@ -288,19 +290,29 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
     for(i = 1; i <= 31; i++)
     {
         // Note +2 offset on key since output of keyschedule are upper 8 byte
-
+        ptmp = pcontent;
+        pcontent = pbb;
+        pbb = ptmp;
         // Reduce data copy by switch between buffers
-        if(ptmp == bb){
-            ptmp = add_round_key_spbox(bb,state, key + 2);
-        }else{
-            ptmp = add_round_key_spbox(state,bb, key + 2);
-        }
+        //if(ptmp == bb){
+            add_round_key_spbox(pcontent, pbb, key + 2);
+        //}else{
+            //ptmp = add_round_key_spbox(state,bb, key + 2);
+        //}
+
+        //ptmp = ....
+        //state
+        // Use swap XOR trick to swap pointers
+
+        /*ptmp = ptmp1 ^ ptmp;
+        ptmp1 = ptmp ^ ptmp1;
+        ptmp = ptmp1 ^ptmp;*/
         update_round_key(key, i);
     }
 
     // Note +2 offset on key since output of keyschedule are upper 8 byte
-    add_round_key(ptmp, key + 2);
+    add_round_key(pbb, key + 2);
 
     // Convert back to normal form
-    unslice(ptmp, pt);
+    unslice(pbb, pt);
 }
