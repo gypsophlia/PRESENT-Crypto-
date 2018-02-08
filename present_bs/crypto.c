@@ -5,6 +5,175 @@ uint64_t boxKS[16] = {
     0xffff000000000000, 0xffff00000000ffff, 0xffff0000ffff0000, 0xffff0000ffffffff,
     0xffffffff00000000, 0xffffffff0000ffff, 0xffffffffffff0000, 0xffffffffffffffff
 };
+// Sbox for higher 4 bits of key[9] in update_round key
+static const char sbox9[256] = {
+    0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9, 0xCA, 0xCB, 0xCC, 0xCD, 0xCE, 0xCF,
+    0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B, 0x5C, 0x5D, 0x5E, 0x5F,
+    0x60, 0x61, 0x62, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B, 0x6C, 0x6D, 0x6E, 0x6F,
+    0xB0, 0xB1, 0xB2, 0xB3, 0xB4, 0xB5, 0xB6, 0xB7, 0xB8, 0xB9, 0xBA, 0xBB, 0xBC, 0xBD, 0xBE, 0xBF,
+    0x90, 0x91, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9A, 0x9B, 0x9C, 0x9D, 0x9E, 0x9F,
+    0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
+    0xA0, 0xA1, 0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xAB, 0xAC, 0xAD, 0xAE, 0xAF,
+    0xD0, 0xD1, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF,
+    0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F,
+    0xE0, 0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xEB, 0xEC, 0xED, 0xEE, 0xEF,
+    0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0xF5, 0xF6, 0xF7, 0xF8, 0xF9, 0xFA, 0xFB, 0xFC, 0xFD, 0xFE, 0xFF,
+    0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F,
+    0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F,
+    0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79, 0x7A, 0x7B, 0x7C, 0x7D, 0x7E, 0x7F,
+    0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F,
+    0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F,
+};
+
+// Shift right by 1
+static const uint8_t RS1box[256]={
+    0b00000000,0b00000000,0b00000001,0b00000001,
+    0b00000010,0b00000010,0b00000011,0b00000011,
+    0b00000100,0b00000100,0b00000101,0b00000101,
+    0b00000110,0b00000110,0b00000111,0b00000111,
+    0b00001000,0b00001000,0b00001001,0b00001001,
+    0b00001010,0b00001010,0b00001011,0b00001011,
+    0b00001100,0b00001100,0b00001101,0b00001101,
+    0b00001110,0b00001110,0b00001111,0b00001111,
+    0b00010000,0b00010000,0b00010001,0b00010001,
+    0b00010010,0b00010010,0b00010011,0b00010011,
+    0b00010100,0b00010100,0b00010101,0b00010101,
+    0b00010110,0b00010110,0b00010111,0b00010111,
+    0b00011000,0b00011000,0b00011001,0b00011001,
+    0b00011010,0b00011010,0b00011011,0b00011011,
+    0b00011100,0b00011100,0b00011101,0b00011101,
+    0b00011110,0b00011110,0b00011111,0b00011111,
+    0b00100000,0b00100000,0b00100001,0b00100001,
+    0b00100010,0b00100010,0b00100011,0b00100011,
+    0b00100100,0b00100100,0b00100101,0b00100101,
+    0b00100110,0b00100110,0b00100111,0b00100111,
+    0b00101000,0b00101000,0b00101001,0b00101001,
+    0b00101010,0b00101010,0b00101011,0b00101011,
+    0b00101100,0b00101100,0b00101101,0b00101101,
+    0b00101110,0b00101110,0b00101111,0b00101111,
+    0b00110000,0b00110000,0b00110001,0b00110001,
+    0b00110010,0b00110010,0b00110011,0b00110011,
+    0b00110100,0b00110100,0b00110101,0b00110101,
+    0b00110110,0b00110110,0b00110111,0b00110111,
+    0b00111000,0b00111000,0b00111001,0b00111001,
+    0b00111010,0b00111010,0b00111011,0b00111011,
+    0b00111100,0b00111100,0b00111101,0b00111101,
+    0b00111110,0b00111110,0b00111111,0b00111111,
+    0b01000000,0b01000000,0b01000001,0b01000001,
+    0b01000010,0b01000010,0b01000011,0b01000011,
+    0b01000100,0b01000100,0b01000101,0b01000101,
+    0b01000110,0b01000110,0b01000111,0b01000111,
+    0b01001000,0b01001000,0b01001001,0b01001001,
+    0b01001010,0b01001010,0b01001011,0b01001011,
+    0b01001100,0b01001100,0b01001101,0b01001101,
+    0b01001110,0b01001110,0b01001111,0b01001111,
+    0b01010000,0b01010000,0b01010001,0b01010001,
+    0b01010010,0b01010010,0b01010011,0b01010011,
+    0b01010100,0b01010100,0b01010101,0b01010101,
+    0b01010110,0b01010110,0b01010111,0b01010111,
+    0b01011000,0b01011000,0b01011001,0b01011001,
+    0b01011010,0b01011010,0b01011011,0b01011011,
+    0b01011100,0b01011100,0b01011101,0b01011101,
+    0b01011110,0b01011110,0b01011111,0b01011111,
+    0b01100000,0b01100000,0b01100001,0b01100001,
+    0b01100010,0b01100010,0b01100011,0b01100011,
+    0b01100100,0b01100100,0b01100101,0b01100101,
+    0b01100110,0b01100110,0b01100111,0b01100111,
+    0b01101000,0b01101000,0b01101001,0b01101001,
+    0b01101010,0b01101010,0b01101011,0b01101011,
+    0b01101100,0b01101100,0b01101101,0b01101101,
+    0b01101110,0b01101110,0b01101111,0b01101111,
+    0b01110000,0b01110000,0b01110001,0b01110001,
+    0b01110010,0b01110010,0b01110011,0b01110011,
+    0b01110100,0b01110100,0b01110101,0b01110101,
+    0b01110110,0b01110110,0b01110111,0b01110111,
+    0b01111000,0b01111000,0b01111001,0b01111001,
+    0b01111010,0b01111010,0b01111011,0b01111011,
+    0b01111100,0b01111100,0b01111101,0b01111101,
+    0b01111110,0b01111110,0b01111111,0b01111111
+};
+
+// Left shift 7
+static const uint8_t LS7box[256]={
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000,
+    0b00000000,0b10000000,0b00000000,0b10000000
+};
+// LUT for mapping last 3 bits to first 3 bits
+// ( res = input << 13)
+static const uint16_t LS13box[8]={
+    0b0000000000000000,
+    0b0010000000000000,
+    0b0100000000000000,
+    0b0110000000000000,
+    0b1000000000000000,
+    0b1010000000000000,
+    0b1100000000000000,
+    0b1110000000000000
+};
+
+// LUT for shifting right by 3 bits (used in update_round_key)
 static const uint8_t ksboxR3[256] = {
     0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
     0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,
@@ -40,6 +209,7 @@ static const uint8_t ksboxR3[256] = {
     0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f,0x1f
 };
 
+// LUT for shifting left by 5 bits (used in update_round_key)
 static const uint8_t ksboxL5[256] = {
     0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0,
     0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0,
@@ -75,10 +245,10 @@ static const uint8_t ksboxL5[256] = {
     0x00,0x20,0x40,0x60,0x80,0xA0,0xC0,0xE0
 };
 static const uint8_t sbox[16] = {
-        0xC, 0x5, 0x6, 0xB, 0x9, 0x0, 0xA, 0xD, 0x3, 0xE, 0xF, 0x8, 0x4, 0x7, 0x1, 0x2,
-    };
+    0xC, 0x5, 0x6, 0xB, 0x9, 0x0, 0xA, 0xD, 0x3, 0xE, 0xF, 0x8, 0x4, 0x7, 0x1, 0x2,
+};
 // For speed move some local var to global
-static uint8_t blockStart,j; 
+static uint8_t blockStart,j;
 /**
  * Bring normal buffer into bitsliced form
  * @param pt Input: state_bs in normal form
@@ -147,31 +317,28 @@ static void unslice(bs_reg_t state_bs[CRYPTO_IN_SIZE_BIT], uint8_t pt[CRYPTO_IN_
  */
 static void update_round_key(uint8_t key[CRYPTO_KEY_SIZE], const uint8_t r)
 {
-    uint8_t tmp = 0;
-    const uint8_t tmp2 = key[2];
-    const uint8_t tmp1 = key[1];
-    const uint8_t tmp0 = key[0];
+    uint16_t *y=(uint16_t*)key;
+    const uint16_t tmp1 = y[1];
+    const uint16_t tmp0 = y[0];
+
 
     // rotate right by 19 bit
-    key[0] = ksboxR3[key[2]] | ksboxL5[key[3]];
-    key[1] = ksboxR3[key[3]] | ksboxL5[key[4]];
-    key[2] = ksboxR3[key[4]] | ksboxL5[key[5]];
-    key[3] = ksboxR3[key[5]] | ksboxL5[key[6]];
-    key[4] = ksboxR3[key[6]] | ksboxL5[key[7]];
-    key[5] = ksboxR3[key[7]] | ksboxL5[key[8]];
-    key[6] = ksboxR3[key[8]] | ksboxL5[key[9]];
-    key[7] = ksboxR3[key[9]] | ksboxL5[tmp0];
-    key[8] = ksboxR3[tmp0]   | ksboxL5[tmp1];
-    key[9] = ksboxR3[tmp1]   | ksboxL5[tmp2];
+    // p16Key is uint16 pointer to the key
+    // LS13box shift left by 13
+    y[0] = y[1]>>3 | LS13box[y[2]&0x7];
+    y[1] = y[2]>>3 | LS13box[y[3]&0x7];
+    y[2] = y[3]>>3 | LS13box[y[4]&0x7];
+    y[3] = y[4]>>3 | LS13box[tmp0&0x7];
+    y[4] = tmp0>>3 | LS13box[tmp1&0x7];
 
-    // perform sbox lookup on MSbits
-    tmp = sbox[key[9] >> 4];
-    key[9] &= 0x0F;
-    key[9] |= tmp << 4;
+    // perform sbox lookup on MSbits of key[9]
+    key[9] =sbox9[key[9]];
 
     // XOR round counter k19 ... k15
-    key[1] ^= r << 7;
-    key[2] ^= r >> 1;
+   	// Sift left by 7
+    key[1] ^= LS7box[r];
+    // Sift right by 1
+    key[2] ^= RS1box[r];
 }
 
 bs_reg_t* add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT], bs_reg_t bb[CRYPTO_IN_SIZE_BIT], const uint8_t key[CRYPTO_KEY_SIZE])
@@ -185,14 +352,14 @@ bs_reg_t* add_round_key_spbox(bs_reg_t state[CRYPTO_IN_SIZE_BIT], bs_reg_t bb[CR
         // Get the lower 4 bits of current byte of key
         uint16_t bit4 = key[i] & 0x0f;
         // Slice key usng LUT
-        uint64_t slicedKey_4bits = boxKS[bit4];
+        uint64_t slicedKey_4bits = boxKS[ key[i] & 0x0f];
         // XOR Lower 4bits of Key with state
         uint64_t *p = ((uint64_t*)state)+i*2;
         *p = *p ^ slicedKey_4bits;
 
 
         // Higher 4bits of current byte of key
-        bit4 = (key[i]>>4) & 0x0f;
+        bit4 = key[i]>>4;
         // Slice key usng LUT
         slicedKey_4bits = boxKS[bit4];
         // XOR Higher 4bits of Key with state
@@ -257,14 +424,14 @@ void add_round_key(bs_reg_t state[CRYPTO_IN_SIZE_BIT],
         // Get the lower 4 bits of current byte of key
         uint16_t bit4 = key[i] & 0x0f;
         // Slice key usng LUT
-        uint64_t slicedKey_4bits = boxKS[bit4];
+        uint64_t slicedKey_4bits = boxKS[key[i] & 0x0f];
         // XOR Lower 4bits of Key with state
         uint64_t *p = ((uint64_t*)state)+i*2;
         *p = *p ^ slicedKey_4bits;
 
 
         // Higher 4bits of current byte of key
-        bit4 = (key[i]>>4) & 0x0f;
+        bit4 = key[i]>>4;
         // Slice key usng LUT
         slicedKey_4bits = boxKS[bit4];
         // XOR Higher 4bits of Key with state
@@ -295,9 +462,9 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
         pbb = ptmp;
         // Reduce data copy by switch between buffers
         //if(ptmp == bb){
-            add_round_key_spbox(pcontent, pbb, key + 2);
+        add_round_key_spbox(pcontent, pbb, key + 2);
         //}else{
-            //ptmp = add_round_key_spbox(state,bb, key + 2);
+        //ptmp = add_round_key_spbox(state,bb, key + 2);
         //}
 
         //ptmp = ....
@@ -305,8 +472,8 @@ void crypto_func(uint8_t pt[CRYPTO_IN_SIZE * BITSLICE_WIDTH], uint8_t key[CRYPTO
         // Use swap XOR trick to swap pointers
 
         /*ptmp = ptmp1 ^ ptmp;
-        ptmp1 = ptmp ^ ptmp1;
-        ptmp = ptmp1 ^ptmp;*/
+          ptmp1 = ptmp ^ ptmp1;
+          ptmp = ptmp1 ^ptmp;*/
         update_round_key(key, i);
     }
 
