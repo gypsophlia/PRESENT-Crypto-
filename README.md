@@ -1,7 +1,7 @@
 # PRESENT 加密算法及优化
 **本代码仅供学习使用 可能有受sidechannel等攻击的风险**
 
-**This code is for sudy purpose only, may be vulernable to sidechannel attack.**
+**This code is for study purpose only, may be vulernable to sidechannel attack.**
 
 本代码在MSP430单片机上实现并优化了PRESENT加密算法，尽可能避免IF语句的使用以保持时间一致性，避免time based sidechannel attack
 
